@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
 
-    @Getter @Setter
+    @Getter
     private int id;
 
     @Getter @Setter
@@ -28,7 +28,7 @@ public class User {
     @Getter @Setter
     private String pwHash;
 
-    @Getter @Setter
+    @Getter
     private List<Order> orders;
 
 }
