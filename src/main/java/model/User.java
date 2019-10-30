@@ -1,8 +1,6 @@
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,22 +11,16 @@ import java.util.List;
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
-@AllArgsConstructor
+@Builder(toBuilder = true)
+//@AllArgsConstructor
+@EqualsAndHashCode
+@Getter
 public class User {
 
-    @Getter @Setter
     private int id;
-
-    @Getter @Setter
     private String username;
-
-    @Getter @Setter
     private String email;
-
-    @Getter @Setter
     private String pwHash;
-
-    @Getter @Setter
     private List<Order> orders;
 
 }
