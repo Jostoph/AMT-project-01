@@ -113,7 +113,7 @@
     </dependencies>
 
     <build>
-        <finalName>project one</finalName>
+        <finalName>project_one</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

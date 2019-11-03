@@ -12,7 +12,7 @@ import java.util.List;
  * @author Alexandre Gabrielli
  */
 @Builder(toBuilder = true)
-//@AllArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Getter
 public class User {
