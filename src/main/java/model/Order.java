@@ -1,9 +1,11 @@
 package model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -12,15 +14,13 @@ import java.util.List;
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
+@Builder(toBuilder = true)
 @AllArgsConstructor
+@EqualsAndHashCode
+@Getter
 public class Order {
 
-    @Getter
-    private int num;
-
-    @Getter
+    private int id;
     private Date date;
-
-    @Getter
-    private List<OrderLine> orderList;
+    private int userId;
 }

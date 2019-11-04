@@ -3,19 +3,18 @@ package integration;
 import business.IAuthenticationService;
 import datastore.exceptions.DuplicateKeyException;
 import datastore.exceptions.KeyNotFoundException;
+import model.Order;
 import model.User;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Stateless
-public class UsersDAO implements IUsersDAO {
+public class OrderDAO implements IOrderDAO {
 
     // For Wildfly (see https://docs.jboss.org/author/display/WFLY10/JNDI+Reference)
     @Resource(lookup = "java:/jdbc/shop")
@@ -25,16 +24,15 @@ public class UsersDAO implements IUsersDAO {
     IAuthenticationService authenticationService;
 
     @Override
-    public User create(User entity) throws DuplicateKeyException {
+    public Order create(Order order) throws DuplicateKeyException {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("INSERT INTO user (USERNAME, EMAIL, HASHED_PW) VALUES (?, ?, ?)");
-            statement.setString(1, entity.getUsername());
-            statement.setString(2, entity.getEmail());
-            statement.setString(3, authenticationService.hashPassword(entity.getPassword()));
+            PreparedStatement statement = con.prepareStatement("INSERT INTO clientOrder (USER_ID,DATE) VALUES (?,?)");
+            statement.setInt(1, order.getUserId());
+            statement.setDate(2, order.getDate());
             statement.execute();
-            return entity;
+            return order;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Error(e);
@@ -43,45 +41,25 @@ public class UsersDAO implements IUsersDAO {
         }
     }
 
+
     @Override
-    public User findById(String username) throws KeyNotFoundException {
+    public Order findById(Integer id) throws KeyNotFoundException {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, EMAIL ,USER_ID  FROM user WHERE USERNAME = ?");
-            statement.setString(1, username);
+            PreparedStatement statement = con.prepareStatement("SELECT ORDER_ID,USER_ID,DATE  FROM clientOrder WHERE ORDER_ID = ?");
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
             if (!hasRecord) {
-                throw new KeyNotFoundException("Could not find user with username = " + username);
+                throw new KeyNotFoundException("Could not find order with id = " + id);
             }
-            User existingUser = User.builder()
-                    .username(rs.getString(1))
-                    .email(rs.getString(2))
-                    .id(rs.getInt(3))
+            Order existingOrder = Order.builder()
+                    .id(rs.getInt(1))
+                    .userId(rs.getInt(2))
+                    .date(rs.getDate(3))
                     .build();
-            return existingUser;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Error(e);
-        } finally {
-            closeConnection(con);
-        }
-    }
-
-
-
-    @Override
-    public void deleteById(String username) throws KeyNotFoundException {
-        Connection con = null;
-        try {
-            con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("DELETE FROM user WHERE USERNAME = ?");
-            statement.setString(1, username);
-            int numberOfDeletedUsers = statement.executeUpdate();
-            if (numberOfDeletedUsers != 1) {
-                throw new KeyNotFoundException("Could not find user with username = " + username);
-            }
+            return existingOrder;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Error(e);
@@ -91,16 +69,35 @@ public class UsersDAO implements IUsersDAO {
     }
 
     @Override
-    public void update(User entity) throws KeyNotFoundException {
+    public void update(Order order) throws KeyNotFoundException {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("UPDATE user SET USERNAME, EMAIL=? WHERE USERNAME = ?");
-            statement.setString(1, entity.getEmail());
-            statement.setString(2, entity.getUsername());
+            PreparedStatement statement = con.prepareStatement("UPDATE user SET ORDER_ID ,USER_ID =? , DATE =? WHERE ORDER_ID = ?");
+            statement.setInt(1, order.getUserId());
+            statement.setDate(2, order.getDate());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
-                throw new KeyNotFoundException("Could not find user with username = " + entity.getUsername());
+                throw new KeyNotFoundException("Could not find order with order id = " + order.getId());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
+    }
+
+    @Override
+    public void deleteById(Integer id) throws KeyNotFoundException {
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("DELETE FROM clientOrder  WHERE ORDER_ID = ?");
+            statement.setInt(1, id);
+            int numberOfDeletedUsers = statement.executeUpdate();
+            if (numberOfDeletedUsers != 1) {
+                throw new KeyNotFoundException("Could not find order with order id  = " + id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,5 +114,4 @@ public class UsersDAO implements IUsersDAO {
             e.printStackTrace();
         }
     }
-
 }

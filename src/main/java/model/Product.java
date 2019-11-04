@@ -1,6 +1,8 @@
 package model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
@@ -9,21 +11,15 @@ import lombok.Getter;
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
+@Builder(toBuilder = true)
 @AllArgsConstructor
+@EqualsAndHashCode
+@Getter
 public class Product {
 
-    @Getter
     private int id;
-
-    @Getter
     private String name;
-
-    @Getter
-    private double price;
-
-    @Getter
+    private float price;
     private String origin;
-
-    @Getter
     private String description;
 }
