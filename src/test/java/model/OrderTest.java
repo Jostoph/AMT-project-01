@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class OrderTest {
 
     private Order order;
-    private final int num = 1;
+    private final int id = 1;
     private final Date date = new Date(42);
     private List<OrderLine> orderList = new ArrayList<OrderLine>();
 
@@ -22,12 +22,12 @@ public class OrderTest {
     public void setUp() {
         orderList.add(new MockOrderLine());
         orderList.add(new MockOrderLine());
-        order = new Order(num, date, orderList);
+        order = new Order(id, date, orderList);
     }
 
     @Test
     public void getNumTest() {
-        assertEquals(num, order.getNum());
+        assertEquals(id, order.getId());
     }
 
     @Test

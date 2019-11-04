@@ -7,14 +7,14 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * Class User
+ * Class Client
  * Represents a client/user of the online shop with
  * his orders
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
 @AllArgsConstructor
-public class User {
+public class Client {
 
     @Getter
     private int id;

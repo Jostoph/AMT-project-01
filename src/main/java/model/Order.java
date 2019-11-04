@@ -16,7 +16,7 @@ import java.util.List;
 public class Order {
 
     @Getter
-    private int num;
+    private int id;
 
     @Getter
     private Date date;
