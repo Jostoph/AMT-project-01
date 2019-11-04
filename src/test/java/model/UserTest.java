@@ -15,11 +15,11 @@ public class UserTest {
     private int id = 1;
     private String name = "Bob";
     private String email = "bob@mail.com";
-    private String pwHash = "1234";
+    private String password = "1234";
 
     @Before
     public void setUp() {
-        user = new User(id, name, email, pwHash, new ArrayList<Order>());
+        user = new User(id, name, email, password, new ArrayList<Order>());
         user.getOrders().add(new MockOrder());
     }
 
@@ -39,8 +39,8 @@ public class UserTest {
     }
 
     @Test
-    public void getPwHashTest() {
-        assertEquals(pwHash, user.getPwHash());
+    public void getPassword() {
+        assertEquals(password, user.getPassword());
     }
 
     @Test
@@ -64,10 +64,10 @@ public class UserTest {
     }
 
     @Test
-    public void setPwHashTest() {
+    public void setPasswordTest() {
         String newPw = "5678";
-        user.setPwHash(newPw);
-        assertEquals(newPw, user.getPwHash());
+        user.setPassword(newPw);
+        assertEquals(newPw, user.getPassword());
     }
 
     @Test

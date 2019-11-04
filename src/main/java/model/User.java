@@ -26,7 +26,7 @@ public class User {
     private String email;
 
     @Getter @Setter
-    private String pwHash;
+    private String password;
 
     @Getter
     private List<Order> orders;
