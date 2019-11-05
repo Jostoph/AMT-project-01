@@ -6,6 +6,7 @@ import model.Order;
 import model.OrderLine;
 
 import javax.annotation.Resource;
+import javax.ejb.Local;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDAO implements IDAO<Integer, Order> {
+@Local
+public class OrderDAO implements IOrderDAO {
 
     @Resource(lookup = "java:/jdbc/shop")
     DataSource dataSource;
@@ -66,13 +68,27 @@ public class OrderDAO implements IDAO<Integer, Order> {
     }
 
     @Override
-    public void update(Order entity) throws KeyNotFoundException {
-
+    public void update(Order entity) throws UnsupportedOperationException{
+        throw new UnsupportedOperationException("An Order can't be changed");
     }
 
     @Override
     public void deleteById(Integer id) throws KeyNotFoundException {
-
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("DELETE FROM clientOrders WHERE ORDER_ID = ?");
+            statement.setInt(1, id);
+            int numberOfDeletedOrders = statement.executeUpdate();
+            if(numberOfDeletedOrders != 1) {
+                throw new KeyNotFoundException("Could not find order with id : " + id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
     }
 
     private void createOrderLines(Order entity, Connection con) throws DuplicateKeyException {

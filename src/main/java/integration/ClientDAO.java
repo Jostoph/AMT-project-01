@@ -7,12 +7,14 @@ import model.Client;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.Local;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Local
 public class ClientDAO implements IClientDAO {
 
     @Resource(lookup = "java:/jdbc/shop")

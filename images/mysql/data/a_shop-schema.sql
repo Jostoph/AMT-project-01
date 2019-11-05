@@ -22,7 +22,7 @@ CREATE TABLE clients (
 
 CREATE TABLE products (
   product_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name VARCHAR(25) NOT NULL,
+  product_name VARCHAR(25) NOT NULL,
   price FLOAT NOT NULL,
   origin VARCHAR(25) NOT NULL,
   description TEXT NOT NULL, 
