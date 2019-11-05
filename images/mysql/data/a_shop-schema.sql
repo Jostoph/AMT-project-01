@@ -10,18 +10,17 @@ USE shop;
 -- Table structure for ENTITY `client`
 --
 
-CREATE TABLE client (
-  client_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  username VARCHAR(45) NOT NULL,
+CREATE TABLE clients (
+  username VARCHAR(45) UNIQUE NOT NULL,
   email VARCHAR(50) NOT NULL,
-  password VARCHAR(60) NOT NULL,
-  PRIMARY KEY  (client_id)
+  password_hash VARCHAR(60) NOT NULL,
+  PRIMARY KEY  (username)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
 -- Table structure for ENTITY `product`
 --
 
-CREATE TABLE product (
+CREATE TABLE products (
   product_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(25) NOT NULL,
   price FLOAT NOT NULL,
@@ -34,24 +33,24 @@ CREATE TABLE product (
 -- Table structure for ENTITY `order`
 --
 
-CREATE TABLE clientOrder (
+CREATE TABLE clientOrders (
   order_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  client_id INT UNSIGNED NOT NULL,
-  date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  username VARCHAR(45) NOT NULL,
+  order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (order_id),
-  FOREIGN KEY (client_id) REFERENCES client (client_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  FOREIGN KEY (username) REFERENCES clients (username) ON DELETE RESTRICT ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for ENTITY/RELATION `orderLine`
 --
 
-CREATE TABLE orderLine (
+CREATE TABLE orderLines (
   product_id INT UNSIGNED NOT NULL,
   order_id INT UNSIGNED NOT NULL,
   quantity INT UNSIGNED DEFAULT 1,
   PRIMARY KEY  (product_id,order_id),
-  FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  FOREIGN KEY (order_id) REFERENCES clientOrder (order_id) ON DELETE RESTRICT ON UPDATE CASCADE
+  FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES clientOrders (order_id) ON DELETE CASCADE ON UPDATE CASCADE
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

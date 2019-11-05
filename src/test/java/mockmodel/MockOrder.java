@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class MockOrder extends Order {
     public MockOrder() {
-        super(1, new Date(42), new ArrayList<OrderLine>());
-        this.getOrderList().add(new MockOrderLine());
-        this.getOrderList().add(new MockOrderLine());
+        super(1, "bob", new Date(42), new ArrayList<>());
+        this.getOrderLines().add(new MockOrderLine());
+        this.getOrderLines().add(new MockOrderLine());
     }
 }

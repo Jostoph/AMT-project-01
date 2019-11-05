@@ -13,22 +13,16 @@ import java.util.List;
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
+
+@Getter
+@Setter
 @AllArgsConstructor
 public class Client {
 
-    @Getter
-    private int id;
-
-    @Getter @Setter
     private String username;
 
-    @Getter @Setter
     private String email;
 
-    @Getter @Setter
     private String password;
-
-    @Getter
-    private List<Order> orders;
 
 }

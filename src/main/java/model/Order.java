@@ -2,6 +2,7 @@ package model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 import java.util.List;
@@ -12,15 +13,16 @@ import java.util.List;
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
+@Getter
+@Setter
 @AllArgsConstructor
 public class Order {
 
-    @Getter
     private int id;
 
-    @Getter
+    private String username;
+
     private Date date;
 
-    @Getter
-    private List<OrderLine> orderList;
+    private List<OrderLine> orderLines;
 }
