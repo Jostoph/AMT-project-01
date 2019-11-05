@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Local
 public class ProductDAO implements IProductDAO {
@@ -43,7 +45,7 @@ public class ProductDAO implements IProductDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT PRODUCT_NAME, PRICE, ORIGIN, DESCRIPTION FROM clients WHERE PRODUCT_ID = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT PRODUCT_NAME, PRICE, ORIGIN, DESCRIPTION FROM products WHERE PRODUCT_ID = ?");
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
@@ -86,7 +88,45 @@ public class ProductDAO implements IProductDAO {
 
     @Override
     public void deleteById(Integer id) throws KeyNotFoundException {
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("DELETE FROM products WHERE PRODUCT_ID = ?");
+            statement.setInt(1, id);
+            int numberOfDeletedProducts = statement.executeUpdate();
+            if(numberOfDeletedProducts != 1) {
+                throw new KeyNotFoundException("Could not find product with id : " + id);
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
+
+    }
+
+    @Override
+    public List<Product> getChunk(int from, int limit) {
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM products LIMIT ?, ?");
+            statement.setInt(1, from);
+            statement.setInt(2, limit);
+            ResultSet rs = statement.executeQuery();
+            ArrayList<Product> retrievedProducts = new ArrayList<>();
+            while (rs.next()) {
+                retrievedProducts.add(new Product(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5)));
+            }
+            return retrievedProducts;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
     }
 
     private void closeConnection(Connection connection) {
