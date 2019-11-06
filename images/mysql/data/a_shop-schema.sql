@@ -1,0 +1,56 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+DROP SCHEMA IF EXISTS shop;
+CREATE SCHEMA shop;
+USE shop;
+
+--
+-- Table structure for ENTITY `client`
+--
+
+CREATE TABLE clients (
+  username VARCHAR(45) UNIQUE NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  password_hash VARCHAR(60) NOT NULL,
+  PRIMARY KEY  (username)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Table structure for ENTITY `product`
+--
+
+CREATE TABLE products (
+  product_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(25) NOT NULL,
+  price FLOAT NOT NULL,
+  origin VARCHAR(25) NOT NULL,
+  description TEXT NOT NULL, 
+  PRIMARY KEY  (product_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for ENTITY `order`
+--
+
+CREATE TABLE clientOrders (
+  order_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  username VARCHAR(45) NOT NULL,
+  order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (order_id),
+  FOREIGN KEY (username) REFERENCES clients (username) ON DELETE RESTRICT ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for ENTITY/RELATION `orderLine`
+--
+
+CREATE TABLE orderLines (
+  product_id INT UNSIGNED NOT NULL,
+  order_id INT UNSIGNED NOT NULL,
+  quantity INT UNSIGNED DEFAULT 1,
+  PRIMARY KEY  (product_id,order_id),
+  FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES clientOrders (order_id) ON DELETE CASCADE ON UPDATE CASCADE
+
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
