@@ -1,4 +1,4 @@
-package model;
+package ch.heigvd.amt.model;
 
 import org.junit.Before;
 import org.junit.Test;

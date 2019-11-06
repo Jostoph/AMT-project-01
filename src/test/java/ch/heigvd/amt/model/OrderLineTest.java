@@ -1,6 +1,5 @@
-package model;
+package ch.heigvd.amt.model;
 
-import mockmodel.MockProduct;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +9,11 @@ public class OrderLineTest {
 
     private OrderLine ol;
     private final int quantity = 3;
+    private final int productId = 4;
 
     @Before
     public void setUp() {
-        ol = new OrderLine(quantity,  new MockProduct());
+        ol = new OrderLine(quantity, productId );
     }
 
     @Test
@@ -23,6 +23,6 @@ public class OrderLineTest {
 
     @Test
     public void getProductTest() {
-        assertEquals(1, ol.getProduct().getId());
+        assertEquals(productId, ol.getProductId());
     }
 }

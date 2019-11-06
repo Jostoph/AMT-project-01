@@ -1,7 +1,8 @@
-package model;
+package ch.heigvd.amt.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Class Product
@@ -9,21 +10,18 @@ import lombok.Getter;
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
+@Getter
+@Setter
 @AllArgsConstructor
 public class Product {
 
-    @Getter
     private int id;
 
-    @Getter
     private String name;
 
-    @Getter
     private double price;
 
-    @Getter
     private String origin;
 
-    @Getter
     private String description;
 }

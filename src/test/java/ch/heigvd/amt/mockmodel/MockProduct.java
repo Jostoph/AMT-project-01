@@ -1,6 +1,6 @@
-package mockmodel;
+package ch.heigvd.amt.mockmodel;
 
-import model.Product;
+import ch.heigvd.amt.model.Product;
 
 public class MockProduct extends Product {
     public MockProduct() {

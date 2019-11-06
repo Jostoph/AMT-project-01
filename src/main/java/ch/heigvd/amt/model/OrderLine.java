@@ -1,7 +1,8 @@
-package model;
+package ch.heigvd.amt.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Class OrderLine
@@ -9,12 +10,12 @@ import lombok.Getter;
  * @author Christop Rueff
  * @author Alexandre Gabrielli
  */
+@Getter
+@Setter
 @AllArgsConstructor
 public class OrderLine {
 
-    @Getter
     private int quantity;
 
-    @Getter
-    private Product product;
+    private int productId;
 }
