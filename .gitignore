@@ -14,3 +14,8 @@ buildNumber.properties
 # intelij
 .idea
 *iml
+
+# node
+datagenerator/package-lock.json
+datagenerator/node_modules
+images/mysql/data/*.csv
