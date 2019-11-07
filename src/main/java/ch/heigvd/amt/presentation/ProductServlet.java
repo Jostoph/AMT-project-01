@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "ProductServlet", urlPatterns = "/shop/products")
+public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -16,6 +16,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
     }
 }

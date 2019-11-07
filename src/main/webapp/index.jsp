@@ -7,15 +7,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Black Market</title>
-  <base href="${pageContext.request.contextPath}/"/>
+  <!-- <base href="${pageContext.request.contextPath}/"/> -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="shortcut icon" href="res/assets/shopicon.png">
   <!-- Bulma Version 0.8.x-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="res/css/main.css">
 </head>
 
 <body>
-  <section class="hero is-dark is-fullheight has-background-dark">
+  <section style="background-image: url('http://lorempixel.com/g/1920/1080/abstract/6/')" class="hero is-dark is-fullheight has-background-dark">
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
@@ -29,10 +31,10 @@
               <span></span>
             </span>
           </div>
-          <div id="navbarMenu" class="navbar-menu">
+          <div id="navbarMenu" class="navbar-menu" style="background: transparent">
             <div class="navbar-end">
               <span class="navbar-item">
-                <a class="button is-white is-outlined" href="/">
+                <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/">
                   <span class="icon">
                     <i class="fa fa-home"></i>
                   </span>
@@ -56,7 +58,7 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <div class="column is-6 is-offset-3">
-          <h1 class="title">
+          <h1 class="title has-text-primary">
             Welcome to the Black Market
           </h1>
           <h2 class="subtitle">
@@ -65,50 +67,14 @@
           <h2 class="subtitle">
             No questions asked...
           </h2>
-          <p>
-          </p>
-          <div class="field">
-            <p class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Username">
-              <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-              </span>
-            </p>
+          <div class="block">
+            <a class="button is-danger" href="shop/products">GET ME IN</a>
           </div>
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="input" type="password" placeholder="Password">
-              <span class="icon is-small is-left">
-                <i class="fa fa-lock"></i>
-              </span>
-            </p>
-          </div>
-          <div class="field is-grouped">
-            <p class="control">
-              <a class="button is-success">
-                Login
-              </a>
-            </p>
-            <p class="control">
-              <a class="button">
-                Sign Up
-              </a>
-            </p>
           </div>
         </div>
-      </div>
     </div>
 
   </section>
 </body>
-<script>
-    (function () {
-        var burger = document.querySelector('.burger');
-        var menu = document.querySelector('#' + burger.dataset.target);
-        burger.addEventListener('click', function () {
-            burger.classList.toggle('is-active');
-            menu.classList.toggle('is-active');
-        });
-    })();
-</script>
+<script type="text/javascript" src="res/lib/bulma.js"></script>
 </html>
