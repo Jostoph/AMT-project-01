@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <section style="background-image: url('http://lorempixel.com/g/1920/1080/abstract/6/')" class="hero is-dark is-fullheight has-background-dark">
+  <section style="background-image: url('<c:url value="/res/assets/tbm-bg.jpeg" />')" class="hero is-dark is-fullheight has-background-dark">
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
@@ -62,10 +62,10 @@
             Welcome to the Black Market
           </h1>
           <h2 class="subtitle">
-            Sign Up now to see our selection of products. Anything from anywhere.
+            Go through our huge selection of products and find anything...
           </h2>
           <h2 class="subtitle">
-            No questions asked...
+            ... from anywhere
           </h2>
           <div class="block">
             <a class="button is-danger" href="shop/products">GET ME IN</a>
