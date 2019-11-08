@@ -4,12 +4,12 @@
 The main objective of this project is to apply the patterns and techniques presented during the lectures, and to create a simple multi-tiered application in Java EE.
 
 ## prerequisites
-we considere you have install correctly all of this programme:
+we consider you have install correctly install all of this programmer:
  - [node](https://nodejs.org/en/download/)
  - [docker & docker-compose](https://www.docker.com/get-started)
  - [git](https://www.atlassian.com/git/tutorials/install-git)
-you also need to have an account on [github](https://github.com/join?source=header-home) and a fonctionnel [ssh protocol to gitHub](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh) 
-## instalation 
+you also need to have an account on [github](https://github.com/join?source=header-home) and a functional [ssh protocol to gitHub](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh) 
+## installation 
 ### free you're port and memory
 this is optional but can avoid some bug like `port already use`or` not enouth space` 
 run this command in a terminal when the daemon docker is started 
@@ -44,11 +44,11 @@ $ cd path/where/you/wanna
 # launch the docker (you need a daemon docker running in you're computer)
 ~path/where/you/wanna/AMT-project-01/ $ docker-compose up --build
 ```
-at this steep you have the project running on you're computeur you can accees by using a browser with the url localhost:9990 or docker-url:9990 depend on you're docker set up. 
+at this steep you have the project running on you're computer you can access by using a browser with the url localhost:9990 or docker-url:9990 depend on you're docker set up. 
 
 ### some information about this installation
 
 #### about the data generator
 
-we have seed the data generator so we will have all the time the same data event if you re-excecute the node script
+we have seed the data generator so we will have all the time the same data event if you re-execute the node script
 
