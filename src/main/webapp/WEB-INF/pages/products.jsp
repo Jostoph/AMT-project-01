@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: christoph
-  Date: 07.11.19
-  Time: 09:30
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -64,6 +57,25 @@
             </div>
         </nav>
     </div>
+</section>
+<section class="section">
+    <table border="1" cellpadding="5" cellspacing="5">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+
+        <c:forEach var="product" items="${products}">
+            <tr>
+                <td>${product.id}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+            </tr>
+        </c:forEach>
+    </table>
+
+
 </section>
 </body>
 <script type="text/javascript" src="<c:url value="/res/lib/bulma.js" /> " defer></script>
