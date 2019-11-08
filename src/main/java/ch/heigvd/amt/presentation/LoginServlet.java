@@ -37,9 +37,6 @@ public class LoginServlet extends HttpServlet {
 
 
             // check credentials
-            // TODO remove
-            System.out.println("in login, pw : " + password);
-            System.out.println("in login client pw : " + client.getPassword());
             if(auth.checkPassword(password, client.getPassword())) {
 
                 // create user session

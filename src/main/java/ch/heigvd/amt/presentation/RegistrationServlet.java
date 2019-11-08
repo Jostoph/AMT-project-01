@@ -55,9 +55,6 @@ public class RegistrationServlet extends HttpServlet {
 
         if(errorMessage.isEmpty()) {
             try {
-                // TODO remove
-                System.out.println("ser username is : " + username);
-                System.out.println("set pw : " + password);
                 Client client = new Client(username, email, password);
 
                 clientDAO.create(client);
