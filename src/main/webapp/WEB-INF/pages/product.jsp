@@ -26,10 +26,15 @@
                         <h1 class="title has-text-white">AMT Market</h1>
                     </a>
                     <span class="navbar-burger burger has-text-danger" data-target="navbarMenu">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <a href="${pageContext.request.contextPath}/logout">
+                    <span class="icon has-text-danger" style="margin-top: 0.8em;margin-right: 1em">
+                        <i class="fa fa-sign-out"></i>
+                    </span>
+                    </a>
                 </div>
                 <div id="navbarMenu" class="navbar-menu" style="background: transparent">
                     <div class="navbar-end">
