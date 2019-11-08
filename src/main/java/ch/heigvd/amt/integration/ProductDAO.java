@@ -6,6 +6,7 @@ import ch.heigvd.amt.model.Product;
 
 import javax.annotation.Resource;
 import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Local
+@Stateless
 public class ProductDAO implements IProductDAO {
 
     @Resource(lookup = "java:/jdbc/shop")

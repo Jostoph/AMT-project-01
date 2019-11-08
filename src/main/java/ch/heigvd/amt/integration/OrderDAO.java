@@ -7,6 +7,7 @@ import ch.heigvd.amt.model.OrderLine;
 
 import javax.annotation.Resource;
 import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Local
+@Stateless
 public class OrderDAO implements IOrderDAO {
 
     @Resource(lookup = "java:/jdbc/shop")
@@ -83,6 +84,27 @@ public class OrderDAO implements IOrderDAO {
             if(numberOfDeletedOrders != 1) {
                 throw new KeyNotFoundException("Could not find order with id : " + id);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
+    }
+
+    @Override
+    public List<Order> getClientOrders(String username) throws KeyNotFoundException {
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT ORDER_ID FROM clientOrders WHERE USERNAME = ?");
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            List<Order> orders = new ArrayList<>();
+            while (rs.next()) {
+                orders.add(findById(rs.getInt(1)));
+            }
+            return orders;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Error(e);

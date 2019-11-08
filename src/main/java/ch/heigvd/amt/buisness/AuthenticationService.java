@@ -14,6 +14,8 @@ public class AuthenticationService implements  IAuthenticationService {
     @Override
     public boolean checkPassword(String plainTextPassword, String hashedPassword) {
         try {
+            // TODO remove
+            System.out.println("checked ps : " + plainTextPassword);
             boolean correct = BCrypt.checkpw(plainTextPassword, hashedPassword);
             return correct;
         } catch (Exception e) {

@@ -48,7 +48,7 @@ public class ClientDAO implements IClientDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, EMAIL FROM clients WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT USERNAME, EMAIL, PASSWORD_HASH FROM clients WHERE USERNAME = ?");
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
@@ -57,7 +57,7 @@ public class ClientDAO implements IClientDAO {
                 throw new KeyNotFoundException("Could not find client with username : " + username);
             }
 
-            return new Client(rs.getString(1), rs.getString(2), null);
+            return new Client(rs.getString(1), rs.getString(2), rs.getString(3));
         } catch (SQLException e) {
             e.printStackTrace();
             throw  new Error(e);

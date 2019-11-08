@@ -1,6 +1,5 @@
 package ch.heigvd.amt.presentation;
 
-import ch.heigvd.amt.buisness.AuthenticationService;
 import ch.heigvd.amt.buisness.IAuthenticationService;
 import ch.heigvd.amt.datastore.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.integration.IClientDAO;
@@ -31,10 +30,16 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        System.out.println("form un : " + username);
+        System.out.println("form pw : " + password);
+
         try {
 
             // search client in database
             Client client = clientDAO.findById(username);
+
+            // TODO remove
+            System.out.println("retrieved client pw : " + client.getPassword());
 
 
             // check credentials

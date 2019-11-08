@@ -69,33 +69,40 @@
                     </h2>
                     <p>
                     </p>
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <input class="input" type="text" placeholder="Username">
-                            <span class="icon is-small is-left">
-                            <i class="fa fa-user"></i>
-                        </span>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control has-icons-left">
-                            <input class="input" type="password" placeholder="Password">
-                            <span class="icon is-small is-left">
-                            <i class="fa fa-lock"></i>
-                        </span>
-                        </p>
-                    </div>
-                    <div class="field is-grouped is-grouped-right">
-                        <p class="control">
-                            <a class="button is-success">
-                                Login
-                            </a>
-                        </p>
-                        <p class="control">
-                            <a class="button">
-                                Sign Up
-                            </a>
-                        </p>
+                    <form action="login" method="post">
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input class="input" type="text" name ="username" placeholder="Username">
+                                <span class="icon is-small is-left">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input class="input" type="password" name="password" placeholder="Password">
+                                <span class="icon is-small is-left">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            </p>
+                        </div>
+                        <div class="field is-grouped is-grouped-right">
+                            <p class="control">
+                                <input class= "button is-success" type="submit" value="Login">
+                            </p>
+                            <p class="control">
+                                <a class="button">
+                                    Sign Up
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                    <div class="has-text-danger">
+                        <% String err = (String) request.getAttribute("invalid");
+                        if(err != null) {
+                            out.println(err);
+                        }
+                        %>
                     </div>
                 </div>
             </div>
