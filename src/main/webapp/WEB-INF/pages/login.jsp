@@ -91,7 +91,7 @@
                                 <input class= "button is-success" type="submit" value="Login">
                             </p>
                             <p class="control">
-                                <a class="button">
+                                <a class="button" href="registration">
                                     Sign Up
                                 </a>
                             </p>

@@ -26,23 +26,20 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // get user form
+        // get login form
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        System.out.println("form un : " + username);
-        System.out.println("form pw : " + password);
 
         try {
 
             // search client in database
             Client client = clientDAO.findById(username);
 
-            // TODO remove
-            System.out.println("retrieved client pw : " + client.getPassword());
-
 
             // check credentials
+            // TODO remove
+            System.out.println("in login, pw : " + password);
+            System.out.println("in login client pw : " + client.getPassword());
             if(auth.checkPassword(password, client.getPassword())) {
 
                 // create user session
@@ -61,7 +58,7 @@ public class LoginServlet extends HttpServlet {
         } catch (KeyNotFoundException e) {
 
             // client not in database, redirect to registration page
-            e.printStackTrace(); // TODO remove
+            e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/registration");
         }
     }

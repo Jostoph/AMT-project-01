@@ -15,7 +15,8 @@ public class AuthenticationService implements  IAuthenticationService {
     public boolean checkPassword(String plainTextPassword, String hashedPassword) {
         try {
             // TODO remove
-            System.out.println("checked ps : " + plainTextPassword);
+            System.out.println("checked psHash : " + plainTextPassword);
+            System.out.println("checked hash : " + hashedPassword);
             boolean correct = BCrypt.checkpw(plainTextPassword, hashedPassword);
             return correct;
         } catch (Exception e) {

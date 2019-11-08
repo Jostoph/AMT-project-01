@@ -30,7 +30,7 @@ for (let i = 0; i < 50000; i++) {
     }
     var name = ""
     name = chance.name()
-    data += "\"" + name + "\"" + ",\"" + chance.email() + "\",\"" + "$2a$10$Sc/KyCFbxbQ2uYOWi7TN/u86/znGgINgujcgownAI9/BRtwiIySCa" + "\"\r\n"
+    data += "\"" + name + "\"" + ",\"" + chance.email() + "\",\"" + "$2a$10$jSYxxk8gKcmOBr6H8UEEG.4zVUpx.AIOrXvQcoIqZn517838Bzn1q" + "\"\r\n"
 
 
     for (let j = chance.integer({ min: 0, max: 3 }); j > 0; j--) {

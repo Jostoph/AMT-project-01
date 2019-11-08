@@ -67,46 +67,47 @@
                     <h1 class="title has-text-primary">
                         Create your Account
                     </h1>
-                    <p>
-                    </p>
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <input class="input" type="text" placeholder="Username">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <input class="input" type="email" placeholder="Email">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-envelope"></i>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control has-icons-left">
-                            <input class="input" type="password" placeholder="Password">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control has-icons-left">
-                            <input class="input" type="password" placeholder="Confirm Password">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="field is-grouped is-grouped-right">
-                        <p class="control">
-                            <a class="button is-success">
-                                Save
-                            </a>
-                        </p>
+                    <form action="registration" method="post">
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input name="username" class="input" type="text" placeholder="Username">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input name="email" class="input" type="email" placeholder="Email">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input name="password" class="input" type="password" placeholder="Password">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input name="password-verif" class="input" type="password" placeholder="Confirm Password">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field is-grouped is-grouped-right">
+                            <p class="control">
+                                <input class="button is-success" type="submit" value="Create Account" />
+                            </p>
+                        </div>
+                    </form>
+                    <div class="has-text-danger">
+                        ${error}
                     </div>
                 </div>
             </div>

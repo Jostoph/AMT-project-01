@@ -13,7 +13,7 @@ USE shop;
 CREATE TABLE clients (
   username VARCHAR(45) UNIQUE NOT NULL,
   email VARCHAR(50) NOT NULL,
-  password_hash VARCHAR(60) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
   PRIMARY KEY  (username)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --

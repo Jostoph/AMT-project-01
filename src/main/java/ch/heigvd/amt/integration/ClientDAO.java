@@ -34,10 +34,11 @@ public class ClientDAO implements IClientDAO {
             statement.setString(2, entity.getEmail());
             statement.setString(3, authenticationService.hashPassword(entity.getPassword()));
             statement.execute();
+
             return entity;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw  new Error(e);
+            throw  new DuplicateKeyException(e.getMessage());
         } finally {
             closeConnection(con);
         }
