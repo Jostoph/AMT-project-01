@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TBM - Registration</title>
+    <title>TBM - Edit Profile</title>
     <base href="${pageContext.request.contextPath}/"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link rel="shortcut icon" href="<c:url value="/res/assets/shopicon.png" />">
@@ -39,7 +39,7 @@
                       <span>Home</span>
                     </a>
                   </span>
-                    <span class="navbar-item">
+                        <span class="navbar-item">
                     <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/shop/products">
                       <span class="icon">
                         <i class="fa fa-shopping-cart"></i>
@@ -47,7 +47,7 @@
                       <span>Shop</span>
                     </a>
                   </span>
-                    <span class="navbar-item">
+                        <span class="navbar-item">
                     <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/shop/profile">
                       <span class="icon">
                         <i class="fa fa-user"></i>
@@ -63,7 +63,7 @@
                       <span>Project Source</span>
                     </a>
                   </span>
-                    <span class="navbar-item">
+                        <span class="navbar-item">
                     <a class="button is-danger is-outlined" href="${pageContext.request.contextPath}/logout">
                       <span class="icon">
                         <i class="fa fa-sign-out"></i>
@@ -81,20 +81,15 @@
             <div class="columns is-centered">
                 <div class="column is-one-third">
                     <h1 class="title has-text-primary">
-                        Create your Account
+                        Modify Account
                     </h1>
-                    <form action="registration" method="post">
+                    <h2 class="subtitle has-text-white">
+                        Modify the fields you want to update and let the rest black.
+                    </h2>
+                    <form action="shop/edit" method="post">
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                                <input name="username" class="input" type="text" placeholder="Username">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-user"></i>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control has-icons-left has-icons-right">
-                                <input name="email" class="input" type="email" placeholder="Email">
+                                <input name="email" class="input" type="email" placeholder="New Email">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-envelope"></i>
                                 </span>
@@ -102,7 +97,7 @@
                         </div>
                         <div class="field">
                             <p class="control has-icons-left">
-                                <input name="password" class="input" type="password" placeholder="Password">
+                                <input name="password" class="input" type="password" placeholder="New Password">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-lock"></i>
                                 </span>
@@ -110,7 +105,7 @@
                         </div>
                         <div class="field">
                             <p class="control has-icons-left">
-                                <input name="password-verif" class="input" type="password" placeholder="Confirm Password">
+                                <input name="password-verif" class="input" type="password" placeholder="Confirm New Password">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-lock"></i>
                                 </span>
@@ -118,7 +113,7 @@
                         </div>
                         <div class="field is-grouped is-grouped-right">
                             <p class="control">
-                                <input class="button is-success" type="submit" value="Create Account" />
+                                <input class="button is-success" type="submit" value="Save Changes" />
                             </p>
                         </div>
                     </form>

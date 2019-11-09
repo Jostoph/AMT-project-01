@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductsServlet", urlPatterns = "/shop/products")
+@WebServlet(name = "ProductsServlet", urlPatterns = {"/shop/products", "/shop"})
 public class ProductsServlet extends HttpServlet {
 
     @EJB
@@ -28,9 +28,13 @@ public class ProductsServlet extends HttpServlet {
         int pageNum = 1;
         int chunkSize = 10;
 
-        String reqPage = request.getParameter("page");
+        // TODO remove
+        System.out.println("In products servlet");
+        String reqPage = request.getParameter("pageNum");
 
         if(reqPage != null) {
+            // TODO remove
+            System.out.println("pageNum is null");
             try {
                 pageNum = Integer.valueOf(reqPage);
             } catch (NumberFormatException e) {
@@ -38,10 +42,25 @@ public class ProductsServlet extends HttpServlet {
             }
         }
 
-        List<Product> products = productDAO.getChunk((pageNum - 1) * chunkSize, chunkSize);
+        int totalNum = productDAO.getNoRecords();
 
-        request.setAttribute("products", products);
-        request.setAttribute("pageNum", pageNum);
+        // TODO remove
+        System.out.println("total is : " + totalNum);
+
+        if(totalNum > 0) {
+            List<Product> products = productDAO.getChunk((pageNum - 1) * chunkSize, chunkSize);
+
+            // TODO remove
+            if(products == null) {
+                System.out.println("products null");
+            } else {
+                System.out.println("size is :" + products.size());
+            }
+
+            request.setAttribute("products", products);
+            request.setAttribute("pageNum", pageNum);
+            request.setAttribute("totalNum", totalNum);
+        }
 
         request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
     }

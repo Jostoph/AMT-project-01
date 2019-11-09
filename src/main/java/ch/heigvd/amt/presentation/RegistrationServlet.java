@@ -19,9 +19,6 @@ public class RegistrationServlet extends HttpServlet {
     @EJB
     IClientDAO clientDAO;
 
-    @EJB
-    IAuthenticationService auth;
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

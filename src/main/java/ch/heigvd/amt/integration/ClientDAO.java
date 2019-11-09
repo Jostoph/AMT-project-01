@@ -72,8 +72,10 @@ public class ClientDAO implements IClientDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("UPDATE clients SET EMAIL = ? WHERE USERNAME = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE clients SET EMAIL = ?, PASSWORD_HASH = ? WHERE USERNAME = ?");
             statement.setString(1, entity.getEmail());
+            statement.setString(2, entity.getPassword());
+            statement.setString(3, entity.getUsername());
             int numberOfUpdatedClients = statement.executeUpdate();
             if(numberOfUpdatedClients != 1) {
                 throw new KeyNotFoundException("Could not find client with username : " + entity.getUsername());

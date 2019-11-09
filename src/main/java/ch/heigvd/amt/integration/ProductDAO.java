@@ -130,6 +130,24 @@ public class ProductDAO implements IProductDAO {
         }
     }
 
+    @Override
+    public int getNoRecords() {
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT  COUNT(product_id) FROM products");
+            ResultSet rs = statement.executeQuery();
+
+            return rs.next() ? rs.getInt(1) : 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
+    }
+
     private void closeConnection(Connection connection) {
         try {
             connection.close();
