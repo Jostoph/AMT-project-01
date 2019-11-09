@@ -78,14 +78,24 @@ class LoginServletTest {
     @Test
     void doPostWithWrongCredentialRedicectToRegistration() throws KeyNotFoundException, ServletException, IOException {
         when(request.getParameter("username")).thenReturn("username");
-        when(request.getParameter("password")).thenReturn("password");
+        when(request.getParameter("password")).thenReturn("wrongPassword");
         when(clientDAO.findById("username")).thenReturn(client);
         when(client.getPassword()).thenReturn("hashpassword");
-        when(auth.checkPassword("password", "hashpassword")).thenReturn(false);
+        when(auth.checkPassword("wrongPassword", "hashpassword")).thenReturn(false);
         when(request.getRequestDispatcher("/WEB-INF/pages/login.jsp")).thenReturn(requestDispatcher);
         servlet.doPost(request, response);
         verify(request, atLeastOnce()).getRequestDispatcher("/WEB-INF/pages/login.jsp");
         verify(requestDispatcher, atLeastOnce()).forward(request, response);
+
+    }
+
+    @Test
+    void doPostWithWrongUserHaveToRedirectToRegistration() throws KeyNotFoundException, IOException, ServletException {
+        when(request.getParameter("username")).thenReturn("wrongUser");
+        when(clientDAO.findById("wrongUser")).thenThrow(KeyNotFoundException.class);
+        servlet.doPost(request,response);
+        verify(response,atLeastOnce()).sendRedirect(request.getContextPath()+"/registration");
+
 
     }
 
