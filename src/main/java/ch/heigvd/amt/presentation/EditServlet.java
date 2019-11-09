@@ -52,7 +52,7 @@ public class EditServlet extends HttpServlet {
             clientDAO.update(updatedClient);
         } catch (KeyNotFoundException e) {
             request.setAttribute("error","The update failed");
-            request.getRequestDispatcher("/WEB-INF/pages/edit.jsp");
+            request.getRequestDispatcher("/WEB-INF/pages/edit.jsp").forward(request, response);
         }
 
         response.sendRedirect(request.getContextPath() + "/logout");

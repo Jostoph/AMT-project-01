@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html style="background-image: url('<c:url value="/res/assets/tbm-bg.jpeg" />')">
 
+<%-- General TODO : Make .war build into wildfly (remove comment, and change build path)--%>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,53 +27,53 @@
               <h1 class="title has-text-white">AMT Market</h1>
             </a>
             <span class="navbar-burger burger has-text-danger" data-target="navbarMenu">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
           </div>
           <div id="navbarMenu" class="navbar-menu" style="background: transparent">
             <div class="navbar-end">
+            <span class="navbar-item">
+              <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/">
+                <span class="icon">
+                  <i class="fa fa-home"></i>
+                </span>
+                <span>Home</span>
+              </a>
+            </span>
               <span class="navbar-item">
-                <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/">
-                  <span class="icon">
-                    <i class="fa fa-home"></i>
-                  </span>
-                  <span>Home</span>
-                </a>
-              </span>
+              <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/shop/products">
+                <span class="icon">
+                  <i class="fa fa-money"></i>
+                </span>
+                <span>Shop</span>
+              </a>
+            </span>
               <span class="navbar-item">
-                <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/shop/products">
-                  <span class="icon">
-                    <i class="fa fa-shopping-cart"></i>
-                  </span>
-                  <span>Shop</span>
-                </a>
-              </span>
+              <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/shop/profile">
+                <span class="icon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <span>My Account</span>
+              </a>
+            </span>
               <span class="navbar-item">
-                <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/shop/profile">
-                  <span class="icon">
-                    <i class="fa fa-user"></i>
-                  </span>
-                  <span>My Account</span>
-                </a>
-              </span>
+              <a class="button is-white is-outlined" href="${pageContext.request.contextPath}/shop/cart">
+                <span class="icon">
+                  <i class="fa fa-shopping-cart"></i>
+                </span>
+                <span>My Cart</span>
+              </a>
+            </span>
               <span class="navbar-item">
-                <a class="button is-white is-outlined" href="https://github.com/Jostoph/AMT-project-01">
-                  <span class="icon">
-                    <i class="fa fa-github"></i>
-                  </span>
-                  <span>Project Source</span>
-                </a>
-              </span>
-              <span class="navbar-item">
-                <a class="button is-danger is-outlined" href="${pageContext.request.contextPath}/logout">
-                  <span class="icon">
-                    <i class="fa fa-sign-out"></i>
-                  </span>
-                  <span>Logout</span>
-                </a>
-              </span>
+              <a class="button is-danger is-outlined" href="${pageContext.request.contextPath}/logout">
+                <span class="icon">
+                  <i class="fa fa-sign-out"></i>
+                </span>
+                <span>Logout</span>
+              </a>
+            </span>
             </div>
           </div>
         </div>
@@ -100,5 +101,6 @@
 
   </section>
 </body>
+
 <script type="text/javascript" src="res/lib/bulma.js"></script>
 </html>

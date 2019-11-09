@@ -50,7 +50,6 @@ public class ProfileServlet extends HttpServlet {
                 for (Order o : orders) {
                     for(OrderLine ol : o.getOrderLines()) {
                         String pName = productDAO.findById(ol.getProductId()).getName();
-                        System.out.println(pName);
                         productNames.put(ol.getProductId(), pName);
                     }
                 }

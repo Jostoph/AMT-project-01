@@ -9,10 +9,7 @@ import javax.annotation.Resource;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +24,23 @@ public class OrderDAO implements IOrderDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("INSERT INTO clientOrders (ORDER_ID, USERNAME) VALUES (?, ?)");
-            statement.setInt(1, entity.getId());
-            statement.setString(2, entity.getUsername());
-            statement.execute();
+            PreparedStatement statement = con.prepareStatement("INSERT INTO clientOrders (USERNAME) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, entity.getUsername());
 
-            // create orderLines for the Order
-            createOrderLines(entity, con);
+            int mordifiedRows = statement.executeUpdate();
+
+            if(mordifiedRows != 1) {
+                throw new SQLException("Create order failed, no rows where changed.");
+            }
+
+            ResultSet key = statement.getGeneratedKeys();
+
+            if(key.next()) {
+                entity.setId(key.getInt(1));
+
+                // create orderLines for the Order
+                createOrderLines(entity, con);
+            }
 
             return entity;
         } catch (SQLException e) {
@@ -115,7 +122,7 @@ public class OrderDAO implements IOrderDAO {
 
     private void createOrderLines(Order entity, Connection con) throws DuplicateKeyException {
         try {
-            PreparedStatement statement = con.prepareStatement("INSERT INTO OERDERLINES (PRODUCT_ID, ORDER_ID, QUANTITY) VALUES (?, ?, ?)");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO orderLines (PRODUCT_ID, ORDER_ID, QUANTITY) VALUES (?, ?, ?)");
             for(OrderLine ol : entity.getOrderLines()) {
                 statement.setInt(1, ol.getProductId());
                 statement.setInt(2, entity.getId());
