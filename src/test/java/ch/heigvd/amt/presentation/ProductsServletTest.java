@@ -24,8 +24,6 @@ class ProductsServletTest {
     @Mock
     HttpServletRequest request;
     @Mock
-    Product product;
-    @Mock
     HttpServletResponse response;
     @Mock
     IProductDAO productDAO;
