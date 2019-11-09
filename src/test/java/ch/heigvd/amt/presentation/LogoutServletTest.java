@@ -28,23 +28,23 @@ class LogoutServletTest {
     LogoutServlet servlet;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         servlet = new LogoutServlet();
     }
 
     @Test
     void doGetShouldInvalidYourSession() throws IOException {
         when(request.getSession()).thenReturn(session);
-        servlet.doGet(request,response);
-        verify(session,atLeastOnce()).invalidate();
+        servlet.doGet(request, response);
+        verify(session, atLeastOnce()).invalidate();
     }
 
     @Test
     void doGetShouldRedirectToLogin() throws IOException {
         when(request.getSession()).thenReturn(session);
         when(request.getContextPath()).thenReturn("contexPath");
-        servlet.doGet(request,response);
-        verify(response,atLeastOnce()).sendRedirect(request.getContextPath()+"/login");
+        servlet.doGet(request, response);
+        verify(response, atLeastOnce()).sendRedirect(request.getContextPath() + "/login");
 
     }
 

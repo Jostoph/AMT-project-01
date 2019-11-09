@@ -31,9 +31,10 @@ public class ProductServlet extends HttpServlet {
 
             product = productDAO.findById(id);
             request.setAttribute("product", product);
+            request.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(request, response);
+
         } catch (KeyNotFoundException | NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/shop/products");
         }
-        request.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(request, response);
     }
 }

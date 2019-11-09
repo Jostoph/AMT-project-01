@@ -36,7 +36,7 @@ public class ProductsServlet extends HttpServlet {
             // TODO remove
             System.out.println("pageNum is null");
             try {
-                pageNum = Integer.valueOf(reqPage);
+                pageNum = Integer.parseInt(reqPage);
             } catch (NumberFormatException e) {
                 // do nothing
             }
