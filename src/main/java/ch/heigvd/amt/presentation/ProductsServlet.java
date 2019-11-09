@@ -1,7 +1,9 @@
 package ch.heigvd.amt.presentation;
 
 import ch.heigvd.amt.integration.IProductDAO;
+import ch.heigvd.amt.model.Client;
 import ch.heigvd.amt.model.Order;
+import ch.heigvd.amt.model.OrderLine;
 import ch.heigvd.amt.model.Product;
 
 import javax.ejb.EJB;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ProductsServlet", urlPatterns = {"/shop/products", "/shop"})
@@ -23,6 +26,26 @@ public class ProductsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int productId;
+        int quantity;
+
+        try {
+            productId = Integer.valueOf(request.getParameter("product"));
+            quantity = Integer.valueOf(request.getParameter("quantity"));
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+
+        // TODO handle empty order
+        HttpSession session = request.getSession(false);
+
+        Order order = (Order) session.getAttribute("order");
+
+        if(order != null) {
+            order.getOrderLines().add(new OrderLine(quantity, productId));
+            request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -34,8 +57,11 @@ public class ProductsServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         Order currentOrder = (Order) session.getAttribute("order");
 
+        Client currentClient = (Client) session.getAttribute("client-session");
+
         if(currentOrder == null) {
-            //session.setAttribute("order", new Order());
+            List<OrderLine> orderLines = new ArrayList<>();
+            session.setAttribute("order", new Order(-1, currentClient.getUsername(), null, orderLines));
         }
 
         String reqPage = request.getParameter("pageNum");
