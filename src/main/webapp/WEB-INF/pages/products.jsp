@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/res/css/main.css" />" >
 </head>
 <body>
-<section class="hero">
+<section class="hero is-fullheight">
     <div class="hero-head">
         <nav class="navbar">
             <div class="container">
@@ -76,32 +76,52 @@
             </div>
         </nav>
     </div>
-</section>
-<section class="section">
-    <div class="container">
-        <table border="1" cellpadding="5" cellspacing="5">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-            </tr>
 
-            <c:forEach var="product" items="${products}">
-                <tr>
-                    <td>${product.id}</td>
-                    <td>${product.name}</td>
-                    <td>${product.price}</td>
-                </tr>
-            </c:forEach>
-        </table>
+    <div class="hero-body">
+        <div class="container has-text-white">
+            <div class="columns">
+                <div class="column is-three-fifths is-offset-one-fifth">
+                    <table style="background: transparent" class="table is-bordered is-narrow is-fullwidth has-text-white">
+                        <tr>
+                            <th class="has-text-primary">ID</th>
+                            <th class="has-text-primary">Name</th>
+                            <th class="has-text-primary">Origin</th>
+                            <th class="has-text-primary">Price</th>
+                            <th class="has-text-primary">Info</th>
+                            <th class="has-text-primary">Buy</th>
+                        </tr>
 
-        <c:if test="${pageNum != 1}">
-            <a class="button" href="shop/products?pageNum=${pageNum - 1}">Previous</a>
-        </c:if>
-        <c:if test="${pageNum lt totalNum}">
-            <a class="button" href="shop/products?pageNum=${pageNum + 1}">Next</a>
-        </c:if>
+                        <c:forEach var="product" items="${products}">
+                            <tr>
+                                <td>${product.id}</td>
+                                <td>${product.name}</td>
+                                <td>${product.origin}</td>
+                                <td>${product.price}</td>
+                                <td><a class="has-text-success has-text-centered" href="${pageContext.request.contextPath}/shop/product?product_id=${orderline.productId}">See Product</a></td>
+                                <td>
+                                    <form action="shop/products" method="post">
+                                        <input type="hidden" name="product" value="${product.id}">
+                                        <div class="field" style="text-align: center">
+                                            <input class ="input is-inline" type="number" min="1" max="100" name="quantity" placeholder="0">
+                                            <input class="button is-success" type="submit" value="Add">
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <c:if test="${pageNum != 1}">
+                        <a class="button" href="shop/products?pageNum=${pageNum - 1}">Previous</a>
+                    </c:if>
+                    <c:if test="${pageNum lt totalNum}">
+                        <a class="button" href="shop/products?pageNum=${pageNum + 1}">Next</a>
+                    </c:if>
+                </div>
+            </div>
         </div>
+    </div>
+
+
 </section>
 </body>
 <script type="text/javascript" src="<c:url value="/res/lib/bulma.js" /> " defer></script>
