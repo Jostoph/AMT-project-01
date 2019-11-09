@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TBM - Profile</title>
+  <title>TBM - Cart</title>
   <base href="${pageContext.request.contextPath}/"/>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
   <link rel="shortcut icon" href="<c:url value="/res/assets/shopicon.png" />">
@@ -78,71 +78,39 @@
       </nav>
     </div>
   </section>
-
   <section class="section">
     <div class="container has-text-white">
       <div class="container" style="padding-bottom: 2em">
         <h1 class="title is-size-2 has-text-primary">
-          Personal Informations
+          Your Order
         </h1>
       </div>
-      <div>
-        <span class="icon is-medium has-text-danger">
-          <i class="fa fa-user"></i>
-        </span>
-        <span class="has-text-primary is-size-4">Username : </span>
-        <span class="is-size-4 has-text-white">
-          <% String username = (String) request.getAttribute("username");
-          out.print(username);%>
-        </span>
-      </div>
-      <div style="margin-bottom: 1em">
-        <span class="icon is-medium has-text-danger">
-          <i class="fa fa-envelope"></i>
-          </span>
-        <span class="has-text-primary is-size-4">Email : </span>
-        <span class="is-size-4 has-text-white">
-          <% String email = (String) request.getAttribute("email");
-          out.print(email);%>
-        </span>
-      </div>
-      <div>
-        <a href="shop/edit" class="button is-success">
-          Edit Profile
-        </a>
-      </div>
-      <div class="container" style="padding-bottom: 2em; padding-top: 2em">
-        <h1 class="title is-size-3 has-text-primary">
-          Orders History
-        </h1>
-      </div>
-      <c:if test="${orders != null}">
-        <c:forEach var="order" items="${orders}">
-          <h2><span class="has-text-primary" style="margin-right: 0.6em">Order ID </span>${order.id}</h2>
-          <h2 style="margin-bottom: 0.6em; margin-top: 0.5em"><span style="margin-right: 1em" class="has-text-primary">Date </span>${order.date}
-          </h2>
-          <div class="columns">
-            <div class="column is-three-quarters">
-              <table style="background: transparent" class="table is-bordered is-narrow is-fullwidth has-text-white">
-                <tr>
-                  <th class="has-text-primary">Product ID</th>
-                  <th class="has-text-primary">Name</th>
-                  <th class="has-text-primary">Quantity</th>
-                  <th class="has-text-primary">Info</th>
-                </tr>
-                <c:forEach var="orderline" items="${order.orderLines}">
-                  <tr>
-                    <td>${orderline.productId}</td>
-                    <td>${productNames[orderline.productId]}</td>
-                    <td>${orderline.quantity}</td>
-                    <td><a class="has-text-success has-text-centered" href="${pageContext.request.contextPath}/shop/product?product_id=${orderline.productId}">See Product</a></td>
-                  </tr>
-                </c:forEach>
-              </table>
-            </div>
-          </div>
+        <div class="field is-grouped">
+          <form action="shop/cart" method="post">
+            <p class="control">
+              <input class="button is-success" name="command" type="submit" value="Order !"/>
+            </p>
+          </form>
+          <form  style="margin-left: 1em" action="shop/cart" method="post">
+            <p class="control">
+              <input class="button is-danger" name="cancel" type="submit" value="Cancel Order"/>
+            </p>
+          </form>
+        </div>
+      <table style="background: transparent" class="table is-bordered is-narrow is-fullwidth has-text-white">
+        <tr>
+          <th class="has-text-primary">Product ID</th>
+          <th class="has-text-primary">Quantity</th>
+          <th class="has-text-primary">Info</th>
+        </tr>
+        <c:forEach var="orderline" items="${order.orderLines}">
+          <tr>
+            <td>${orderline.productId}</td>
+            <td>${orderline.quantity}</td>
+            <td><a class="has-text-success has-text-centered" href="${pageContext.request.contextPath}/shop/product?product_id=${orderline.productId}">See Product</a></td>
+          </tr>
         </c:forEach>
-      </c:if>
+      </table>
     </div>
   </section>
 </body>

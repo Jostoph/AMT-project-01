@@ -1,6 +1,5 @@
 package ch.heigvd.amt.presentation;
 
-import ch.heigvd.amt.buisness.IAuthenticationService;
 import ch.heigvd.amt.datastore.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.integration.IClientDAO;
 import ch.heigvd.amt.model.Client;
@@ -40,7 +39,6 @@ public class RegistrationServlet extends HttpServlet {
                 errorMessage += "The username must be at least 4 character long.<br />";
             }
 
-            // TODO make it 8 min
             if(password.length() < 6) {
                 errorMessage += "The password needs to be at least 6 character long.<br />";
             }

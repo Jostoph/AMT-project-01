@@ -20,31 +20,51 @@ public class ShoppingCartServlet extends HttpServlet {
     IOrderDAO orderDAO;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO make the actual order validation from here
-        // TODO add button to see cart -> replace github
-        // TODO format JSP...
-    }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO this is a test implementation !! need to display page with actual order that must be validated
         HttpSession session = request.getSession(false);
 
         Order currentOrder = (Order) session.getAttribute("order");
 
-        if(currentOrder == null) {
-            System.out.println("Order is null");
-        } else {
-            if(currentOrder.getOrderLines().isEmpty()) {
-                System.out.println("Order line is empty");
-            } else {
+        if(request.getParameter("command") != null) {
+            // send order
+            if(currentOrder != null && !currentOrder.getOrderLines().isEmpty()) {
                 try {
                     orderDAO.create(currentOrder);
-                    session.invalidate();
-                    System.out.println("order created");
+                    // reset order
+                    session.removeAttribute("order");
+                    response.sendRedirect(request.getContextPath() + "/shop/profile");
                 } catch (DuplicateKeyException e) {
-                    System.out.println("error in order creation (duplicate)");
+                    e.printStackTrace();
+                    response.sendRedirect(request.getContextPath() + "/shop/products");
                 }
+            } else {
+                // should never go there
+                response.sendRedirect(request.getContextPath() + "/shop/products");
             }
+
+        } else if(request.getParameter("cancel") != null) {
+            // cancel order
+            session.removeAttribute("order");
+            response.sendRedirect(request.getContextPath() + "/shop/shop");
+        } else {
+            // should not go there
+            request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request, response);
+        }
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+
+        Order currentOrder = (Order) session.getAttribute("order");
+
+        if(currentOrder != null) {
+            request.setAttribute("order", currentOrder);
+            request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request, response);
+        } else {
+            // should never go there
+            response.sendRedirect(request.getContextPath() + "/shop/products");
         }
     }
 }

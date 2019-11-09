@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "ProductsServlet", urlPatterns = {"/shop/products", "/shop"})
+@WebServlet(name = "ProductsServlet", urlPatterns = {"/shop/products", "/shop/*"})
 public class ProductsServlet extends HttpServlet {
 
     @EJB
@@ -30,21 +30,21 @@ public class ProductsServlet extends HttpServlet {
         int quantity;
 
         try {
-            productId = Integer.valueOf(request.getParameter("product"));
+            productId = Integer.valueOf(request.getParameter("product_id"));
             quantity = Integer.valueOf(request.getParameter("quantity"));
         } catch (NumberFormatException e) {
+            e.printStackTrace();
             response.sendRedirect(request.getContextPath());
             return;
         }
 
-        // TODO handle empty order
         HttpSession session = request.getSession(false);
 
         Order order = (Order) session.getAttribute("order");
 
         if(order != null) {
             order.getOrderLines().add(new OrderLine(quantity, productId));
-            request.getRequestDispatcher("/WEB-INF/pages/products.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/shop/products?pageNum=" + request.getParameter("currentPage"));
         }
     }
 
