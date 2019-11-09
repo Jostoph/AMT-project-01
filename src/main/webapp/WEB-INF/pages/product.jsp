@@ -17,7 +17,7 @@
 
 </head>
 <body>
-  <section class="hero">
+  <section class="hero is-fullheight">
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
@@ -78,15 +78,33 @@
         </div>
       </nav>
     </div>
-  </section>
-  <section class="section has-text-white">
-    <%-- TODO css--%>
-    <img src="<% Product p = (Product) request.getAttribute("product"); out.print("https://picsum.photos/id/" + (p.getId() % 1000) +"/500/500");%>"
-         alt="product image"/>
-    <h2>${product.name}</h2>
-    <h2>${product.price}</h2>
-    <h2>${product.origin}</h2>
-    <h2>${product.description}</h2>
+
+    <div class="columns" style="margin-top: 1em">
+      <div class="column is-three-fifths is-offset-one-fifth is-one-third-desktop is-offset-one-third-desktop">
+        <div class="card is-shady">
+          <div class="card-image">
+            <figure class="image is-1by1by3">
+              <img src="<% Product p = (Product) request.getAttribute("product"); out.print("https://picsum.photos/id/" + (p.getId() % 1000) +"/500/500");%>" alt="${product.name}"/>
+            </figure>
+          </div>
+          <div class="card-content  modal-button">
+            <div class="content">
+              <h1>${product.name}</h1>
+              <h4><span>Origin : </span>${product.origin}</h4>
+              <p>${product.description}</p>
+              <span class="button is-primary">
+            ${product.price}
+            <span class="icon has-icons-right" style="margin-left: 0.8em">
+              <i class="fa fa-beer"></i>
+            </span>
+          </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
 </section>
 </body>
 
