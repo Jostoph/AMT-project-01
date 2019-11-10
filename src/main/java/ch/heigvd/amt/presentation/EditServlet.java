@@ -30,15 +30,11 @@ public class EditServlet extends HttpServlet {
         String passwordVerif = request.getParameter("password-verif");
 
         if(!password.isEmpty()) {
-
-            if(!password.equals(passwordVerif)) {
-                request.setAttribute("error", "The passwords are not equal.");
+            if(!password.equals(passwordVerif) || password.length() < 6) {
+                request.setAttribute("error", "The passwords must be equal and at least 6 characters long.");
+                request.getRequestDispatcher("/WEB-INF/pages/edit.jsp").forward(request, response);
+                return;
             }
-
-            if(password.length() < 6) {
-                request.setAttribute("error", "The password must be at least 6 characters long.");
-            }
-            request.getRequestDispatcher("/WEB-INF/pages/edit.jsp").forward(request, response);
         }
 
         Client current = (Client) request.getSession(false).getAttribute("client-session");
@@ -52,6 +48,7 @@ public class EditServlet extends HttpServlet {
         } catch (KeyNotFoundException e) {
             request.setAttribute("error","The update failed");
             request.getRequestDispatcher("/WEB-INF/pages/edit.jsp").forward(request, response);
+            return;
         }
 
         response.sendRedirect(request.getContextPath() + "/logout");
