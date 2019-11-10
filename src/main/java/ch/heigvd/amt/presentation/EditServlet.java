@@ -22,7 +22,6 @@ public class EditServlet extends HttpServlet {
     @EJB
     IAuthenticationService auth;
 
-    // TODO add delete account ?
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // get modification form

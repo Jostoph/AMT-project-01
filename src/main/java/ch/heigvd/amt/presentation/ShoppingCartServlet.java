@@ -34,7 +34,6 @@ public class ShoppingCartServlet extends HttpServlet {
                     session.removeAttribute("order");
                     response.sendRedirect(request.getContextPath() + "/shop/profile");
                 } catch (DuplicateKeyException e) {
-                    e.printStackTrace();
                     response.sendRedirect(request.getContextPath() + "/shop/products");
                 }
             } else {

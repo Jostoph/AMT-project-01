@@ -107,9 +107,14 @@
         </span>
       </div>
       <div>
-        <a href="shop/edit" class="button is-success">
-          Edit Profile
-        </a>
+        <div class="field is-grouped">
+          <a href="shop/edit" class="button is-success" style="margin-right: 1em">
+            Edit Profile
+          </a>
+          <form action="shop/profile" method="post">
+            <input class="button is-danger" name="delete" type="submit" value="Delete Account"/>
+          </form>
+        </div>
       </div>
       <div class="container" style="padding-bottom: 2em; padding-top: 2em">
         <h1 class="title is-size-3 has-text-primary">

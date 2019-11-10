@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/shop/products");
             } else {
 
+                // invalid password
                 // invalid credentials, send error
                 request.setAttribute("invalid", "Invalid Credentials");
                 request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
@@ -54,9 +55,10 @@ public class LoginServlet extends HttpServlet {
 
         } catch (KeyNotFoundException e) {
 
-            // client not in database, redirect to registration page
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/registration");
+            // client not in database
+            // invalid credentials, send error
+            request.setAttribute("invalid", "Invalid Credentials");
+            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
         }
     }
 
