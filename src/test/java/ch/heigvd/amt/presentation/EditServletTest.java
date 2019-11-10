@@ -76,4 +76,21 @@ class EditServletTest {
         verify(dispatcher,atLeastOnce()).forward(request,response);
 
     }
+
+    @Test
+    void doPostLogoutWhenUpdateClient() throws ServletException, IOException {
+        when(request.getParameter("email")).thenReturn("email");
+        when(request.getParameter("password")).thenReturn("password");
+        when(request.getParameter("password-verif")).thenReturn("password");
+        when(request.getContextPath()).thenReturn("contextPath");
+        when(request.getSession(false)).thenReturn(session);
+        when(session.getAttribute("client-session")).thenReturn(client);
+
+        servlet.doPost(request,response);
+
+        verify(response,atLeastOnce()).sendRedirect(request.getContextPath() + "/logout");
+
+
+    }
+
 }
