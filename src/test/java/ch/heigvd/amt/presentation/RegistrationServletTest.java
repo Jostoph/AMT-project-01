@@ -2,13 +2,7 @@ package ch.heigvd.amt.presentation;
 
 import ch.heigvd.amt.datastore.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.integration.IClientDAO;
-import ch.heigvd.amt.integration.IProductDAO;
 import ch.heigvd.amt.model.Client;
-import ch.heigvd.amt.model.Order;
-import ch.heigvd.amt.model.OrderLine;
-import ch.heigvd.amt.model.Product;
-import com.sun.deploy.net.HttpRequest;
-import com.sun.deploy.net.HttpResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,14 +13,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.swing.event.CaretListener;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

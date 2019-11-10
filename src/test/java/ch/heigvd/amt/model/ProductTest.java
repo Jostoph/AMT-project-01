@@ -43,4 +43,34 @@ public class ProductTest {
     public void getDescriptionTest() {
         assertEquals(des, p.getDescription());
     }
+
+    @Test
+    public void setIdTest() {
+        p.setId(42);
+        assertEquals(42, p.getId());
+    }
+
+    @Test
+    public void setNameTest() {
+        p.setName("newProdName");
+        assertEquals("newProdName", p.getName());
+    }
+
+    @Test
+    public void setPriceTest() {
+        p.setPrice(4.2);
+        assertEquals(4.2, p.getPrice(), 0);
+    }
+
+    @Test
+    public void setOriginTest() {
+        p.setOrigin("newOrigin");
+        assertEquals("newOrigin", p.getOrigin());
+    }
+
+    @Test
+    public void setDescriptionTest() {
+        p.setDescription("newDescription");
+        assertEquals("newDescription", p.getDescription());
+    }
 }

@@ -25,4 +25,16 @@ public class OrderLineTest {
     public void getProductTest() {
         assertEquals(productId, ol.getProductId());
     }
+
+    @Test
+    public void setQuantityTest() {
+        ol.setQuantity(42);
+        assertEquals(42, ol.getQuantity());
+    }
+
+    @Test
+    public void setProductIdTest() {
+        ol.setProductId(42);
+        assertEquals(42, ol.getProductId());
+    }
 }
