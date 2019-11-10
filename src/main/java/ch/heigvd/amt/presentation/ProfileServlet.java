@@ -44,6 +44,7 @@ public class ProfileServlet extends HttpServlet {
             try {
                 clientDAO.deleteById(currentClient.getUsername());
             } catch (KeyNotFoundException e) {
+                //this case should'nt happen
                 e.printStackTrace();
             }
 
