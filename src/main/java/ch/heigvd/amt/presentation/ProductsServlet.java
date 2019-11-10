@@ -68,7 +68,7 @@ public class ProductsServlet extends HttpServlet {
 
         if(reqPage != null) {
             try {
-                pageNum = Integer.valueOf(reqPage);
+                pageNum = Integer.parseInt(reqPage);
             } catch (NumberFormatException e) {
                 // do nothing
             }

@@ -9,8 +9,8 @@ import java.io.IOException;
 
 @WebFilter(filterName = "SecurityFilter", urlPatterns = "/shop/*")
 public class SecurityFilter implements Filter {
-    public void destroy() {
-    }
+//    public void destroy() {
+//    }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 
@@ -28,8 +28,8 @@ public class SecurityFilter implements Filter {
         }
     }
 
-    public void init(FilterConfig config) throws ServletException {
-
-    }
+//    public void init(FilterConfig config) throws ServletException {
+//
+//    }
 
 }
