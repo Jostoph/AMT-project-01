@@ -8,10 +8,7 @@ import javax.annotation.Resource;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +23,24 @@ public class ProductDAO implements IProductDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("INSERT INTO products (PRODUCT_NAME, PRICE, ORIGIN, DESCRIPTION) VALUES (?, ?, ?, ?)");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO products (PRODUCT_NAME, PRICE, ORIGIN, DESCRIPTION) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, entity.getName());
             statement.setDouble(2, entity.getPrice());
             statement.setString(3, entity.getOrigin());
             statement.setString(4, entity.getDescription());
-            statement.execute();
+
+            int mordifiedRows = statement.executeUpdate();
+
+            if(mordifiedRows != 1) {
+                throw new SQLException("Create order failed, no rows where changed.");
+            }
+
+            ResultSet key = statement.getGeneratedKeys();
+
+            if(key.next()) {
+                entity.setId(key.getInt(1));
+            }
+
             return entity;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,11 +78,12 @@ public class ProductDAO implements IProductDAO {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("UPDATE products SET PRODUCT_NAME, PRICE, ORIGIN, DESCRIPTION WHERE PRODUCT_ID = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE products SET PRODUCT_NAME = ?, PRICE = ?, ORIGIN = ?, DESCRIPTION = ? WHERE PRODUCT_ID = ?");
             statement.setString(1, entity.getName());
             statement.setDouble(2, entity.getPrice());
             statement.setString(3, entity.getOrigin());
             statement.setString(4, entity.getDescription());
+            statement.setInt(5, entity.getId());
 
             int numberOfUpdatedProducts = statement.executeUpdate();
             if(numberOfUpdatedProducts != 1) {
