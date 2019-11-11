@@ -19,3 +19,6 @@ buildNumber.properties
 datagenerator/package-lock.json
 datagenerator/node_modules
 images/mysql/data/*.csv
+
+# war
+images/wildfly/data/*.war
