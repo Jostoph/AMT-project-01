@@ -4,8 +4,6 @@ MAINTAINER Christoph Rueff <christoph.rouffsoitrueff@heig-vd.ch>
 
 ADD data/mysql-connector-java-5.1.48-bin.jar /opt/jboss/wildfly/standalone/deployments
 
-ADD data/AMT-project-01.war /opt/jboss/wildfly/standalone/deployments
-
 ADD data/standalone.xml /opt/jboss/wildfly/standalone/configuration/
 
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
