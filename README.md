@@ -123,54 +123,35 @@ The data consists of:
 
 ## JMeter results
 
-We try to quantify the impact of using pagination for products servlet. We use Jmeter for simulate 100 users connection and each of them do 200 requests to the servlet. 
+Using **JMeter**, we tried to quantify the impact of pagination in the **products servlet** when retrieving the products list from the database and diplaying them on the `/shop/products` page.
 
-We start with 10 elements by pages, we obtains the next graph.
+We configured **JMeter** to simulate 100 users/clients (threads) trying to access this page at the same time. The connection through the login page is puporsely not taken in account (tracked), it is not included in what we want to test.
 
-```
+The clients send 200 `GET` requests on the `/shop/products` page.
 
-Nous tentons grâce à Jmeter de quantifier l’impact de l’utilisation d’une pagination sur notre page /shop/products. Pour ce faire nous utilisons Jmeter pour que 100 Utilisateurs (représenter par des threads) se connecte sur le site via /login. Nous désactivons volontairement le suivit de la redirection car cette redirection ne fait pas partie de notre test. Puis nous effectuons 200 requêtes GET sur /shop/produit. 
- Nous commençons avec une pagination à 10 éléments par page, et obtenons le graphique suivant :  
-
-```
+We start with a pagination of 10 records by pages, what gives us the following graph :
 
 ![GraphResponseTimeFor10](./Jmeter/GraphResponseTimeFor10.png)
 
-```
-On peu voir que le temps de réponses varie entre 17'000 et 20'000 millisecondes sans jamais les dépasser 
-```
-
- We can see that the response time stay between 17'000 and 20'000 millisecond. 
+ We can see that the response time stays between 17'000 and 20'000 milliseconds. 
 
 ![GraphResoinseTimeFor5000](./Jmeter/GraphResoinseTimeFor5000.png)
 
-```
-Nous augmentons ensuite la pagination à 5'000 éléments et relançons les tests et obtenons le graphique suivant 
-```
-
- we augment the number of element by page at 5'000 and relauch the test. we obtains the next graph: 
+ We rise the number of records by pages to 5'000 and restart the test to get the next graph : 
 
 ![Graphique évolution temps de réponses_5000](./Jmeter/graphique évolution temps de réponses_5000.png)
 
-```
-On voit que cette fois si le temps de réponse varie entre 33'000 et 39'000 (après stabilisation).
-```
+The response time goes up between 33'000 and 39'000 milliseconds (after stabilisation).
 
- We see the response time go up between 33'000 and 39'000
+We stoped the tests here because rising the number of elements started causing us trouble with the buffer of the server or the java memory. But at this point we can see that even with 5'000 elements/page the difference in terme of response time is already high enough to show the impact and utility of pagination.
 
-When we try to put more elements into each pages we obtains error cause of buffer size or java Vm memory capacity. we don't invistigate more cause we known what's going on. 
+We should also not forget that putting too few elements/page is not a great idea either. The users will need to perform more requests to go through the items (and on a user's point of view it can be tedious).
 
-We know that more we puts elements into the pages the more response time we got. But we don't forget that if we use one element by page the user will use more request for acces to the good element and he can be frustrated to have to click 20 times to next, we choose to use 10 elements by page for combine the response time, the UI and the user's experience. 
-
-```
-Nous arrêtons nos tests ici car avec plus d’éléments par page soit les buffers de notre serveur ne sont pas assez grand soit jmeter nous retourne une erreur java (aussi lier à la taille en mémoire). Nous n’investiguons pas plus car il est évident que déjà avec 5'000 éléments par page la différence en termes de temps de réponse est déjà suffisamment significative pour dire que plus ont met d’élément sur la page plus le temps de réponse augmente. 
-
- Bien sur ils ne faut pas oublier que si on ne met qu’un élément par page un utilisateur fera plus de requête car il changera plus de page pour accéder à la ressource désirer. C’est pour ça que nous avons choisi 10 éléments par page qui semblent un bon compromis entre les temps de réponse, l’interface utilisateur et le confort d’utilisation. 
-```
+For the reasons listed above, we chose to use a pagination of 10 elements on our products page (It also looks better this way).
 
 ## Known bugs
 
-// TODO
+There are actually no bugs in our application that we are awere of. If you find some, please think of it as a feature and contact us (It could be a feature that we don't really want ;)
 
 ## Features that could be improved (with additional time)
 
