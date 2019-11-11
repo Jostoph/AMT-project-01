@@ -134,7 +134,7 @@ Nous tentons grâce à Jmeter de quantifier l’impact de l’utilisation d’un
 
 ```
 
-![Graphique évolution temps de réponses avec 10 élements/page](.\Jmeter\Graphique évolution temps de réponses.png)
+![GraphResponseTimeFor10](./Jmeter/GraphResponseTimeFor10.png)
 
 ```
 On peu voir que le temps de réponses varie entre 17'000 et 20'000 millisecondes sans jamais les dépasser 
@@ -142,7 +142,7 @@ On peu voir que le temps de réponses varie entre 17'000 et 20'000 millisecondes
 
  We can see that the response time stay between 17'000 and 20'000 millisecond. 
 
-![Graphique évolution temps de réponses avec 5000 élements/page](.\Jmeter\Graphique évolution temps de réponses_5000.png)
+![GraphResoinseTimeFor5000](./Jmeter/GraphResoinseTimeFor5000.png)
 
 ```
 Nous augmentons ensuite la pagination à 5'000 éléments et relançons les tests et obtenons le graphique suivant 
@@ -150,7 +150,7 @@ Nous augmentons ensuite la pagination à 5'000 éléments et relançons les test
 
  we augment the number of element by page at 5'000 and relauch the test. we obtains the next graph: 
 
-![Graphique évolution temps de réponses_5000](.\Jmeter\Graphique évolution temps de réponses_5000.png)
+![Graphique évolution temps de réponses_5000](./Jmeter/graphique évolution temps de réponses_5000.png)
 
 ```
 On voit que cette fois si le temps de réponse varie entre 33'000 et 39'000 (après stabilisation).
