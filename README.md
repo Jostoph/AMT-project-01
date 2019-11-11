@@ -103,7 +103,7 @@ Now you can start the tests (in another terminal)
 
   Make sure you generated the sample data first (at least once). 
   
-  See [**Run the tests suite**](#run-the-tests-suite)
+  See [**Run App**](#run-app)
     
 
 ## Some additional information
