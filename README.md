@@ -47,13 +47,38 @@ with either `localhost` or `<your docker-machine ip>` in the following places ac
 ```
 
 
-## Run project
+## Run app
 
-// TODO
+All the executables are in the `launcher` folder.
 
-## Run the test suite
+First, generate the sample data by executing the `launcher/gen-data.sh` file. (you only need to do that once ! It takes some time...)
+```bash
+# from the project root folder
+./launcher/gen-data.sh
+```
 
-// TODO
+Now you can build and lauch the app by executing the `launcher/launch-app.sh` file.
+```bash
+# from the project root folder
+./launcher/launch-app.sh
+```
+
+To access the application, open a browser and go on the following link (change localhost by your docker-machine address if you use one)
+
+[http://localhost:8080/AMT-project-01](http://localhost:8080/AMT-project-01)
+
+## Run the tests suite
+
+To run the tests suite you will first need to start the *test* dockers.
+```bash
+# from the project root folder
+./launcher/start-test-dockers.sh
+```
+Now you can start the tests (in another terminal)
+```bash
+# from the project root folder
+./launcher/run-tests.sh
+```
 
 ## Troubleshooting
 
@@ -72,7 +97,13 @@ with either `localhost` or `<your docker-machine ip>` in the following places ac
     
 - Error while launching the tests suite
 
-   Make sure you have set your `arquillian.xml` with *localhost* or with your **docker-machine** address. 
+   Make sure you have set your `arquillian.xml` with *localhost* or with your **docker-machine** address.
+
+- Launching `launch-app.sh` fails with `not found (Errcode: 2 - No such file or directory)`
+
+  Make sure you generated the sample data first (at least once). 
+  
+  See [**Run the tests suite**](#run-the-tests-suite)
     
 
 ## Some additional information
