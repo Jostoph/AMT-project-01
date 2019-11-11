@@ -135,11 +135,9 @@ We start with a pagination of 10 records by pages, what gives us the following g
 
  We can see that the response time stays between 17'000 and 20'000 milliseconds. 
 
-![GraphResoinseTimeFor5000](./Jmeter/GraphResoinseTimeFor5000.png)
-
  We rise the number of records by pages to 5'000 and restart the test to get the next graph : 
 
-![Graphique évolution temps de réponses_5000](./Jmeter/graphique évolution temps de réponses_5000.png)
+![GraphResoinseTimeFor5000](./Jmeter/GraphResoinseTimeFor5000.png)
 
 The response time goes up between 33'000 and 39'000 milliseconds (after stabilisation).
 
