@@ -55,14 +55,14 @@ All the executables are in the `launcher` folder.
 
 First, generate the sample data by executing the `launcher/gen-data.sh` file. (you only need to do that once ! It takes some time...)
 ```bash
-# from the project root folder
-./launcher/gen-data.sh
+# from the launcher folder
+./gen-data.sh
 ```
 
 Now you can build and lauch the app by executing the `launcher/launch-app.sh` file.
 ```bash
-# from the project root folder
-./launcher/launch-app.sh
+# from the launcher folder
+./launch-app.sh
 ```
 
 To access the application, open a browser and go on the following link (change localhost by your docker-machine address if you use one)
@@ -73,13 +73,13 @@ To access the application, open a browser and go on the following link (change l
 
 To run the tests suite you will first need to start the *test* dockers.
 ```bash
-# from the project root folder
-./launcher/start-test-dockers.sh
+# from the launcher folder
+./start-test-dockers.sh
 ```
 Now you can start the tests (in another terminal)
 ```bash
-# from the project root folder
-./launcher/run-tests.sh
+# from the launcher folder
+./run-tests.sh
 ```
 
 ## Troubleshooting
