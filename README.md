@@ -16,6 +16,8 @@ go on the **Account Edition page** to change your **email** or your **password**
 When you find a product look closer at some of the products you can click on the **see product** link and
 it will show you the specific product on a new page with some more information and an image.
 
+Don't forget to check our 404 custom page ;)
+
 ## Pre-requisites
 
 we consider you have install correctly install all of this programs:
