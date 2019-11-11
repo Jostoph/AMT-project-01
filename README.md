@@ -8,13 +8,13 @@ The main objective of this project is to apply the patterns and techniques prese
 
 Our application is called **The Black Market**, it is a simplified online shop (extremely simplified)
 that is accessible by creating an account on it. After you are logged in you can start browsing through a
-set of *fake products*, and them to your shopping cart and order them. Nothing to pay, but you wont get them anyway ;)
+set of *fake products*, and them to your shopping cart and order (or cancel) them. Nothing to pay, but you wont get them anyway ;)
 
 You can take a look at your account and see your order history. There you have the possibility to delete your account or
 go on the **Account Edition page** to change your **email** or your **password**.
 
 When you find a product look closer at some of the products you can click on the **see product** link and
-it will show you the specific product on a new page with some more information and an image. (The image is)
+it will show you the specific product on a new page with some more information and an image.
 
 ## Pre-requisites
 
