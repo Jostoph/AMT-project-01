@@ -77,6 +77,8 @@ To run the tests suite you will first need to start the *test* dockers.
 ./start-test-dockers.sh
 ```
 Now you can start the tests (in another terminal)
+
+It is possible that you will need to loggin to the wildfly administration page (on port 9990) before starting the tests with the credentials *admin* *admin*. It seems that it can cause some trouble to start the tests without doing that before.
 ```bash
 # from the launcher folder
 ./run-tests.sh
