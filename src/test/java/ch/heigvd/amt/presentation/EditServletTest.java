@@ -1,6 +1,7 @@
 package ch.heigvd.amt.presentation;
 
 import ch.heigvd.amt.buisness.IAuthenticationService;
+import ch.heigvd.amt.datastore.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.integration.IClientDAO;
 import ch.heigvd.amt.model.Client;
 import org.junit.jupiter.api.BeforeEach;
@@ -78,7 +79,7 @@ class EditServletTest {
     }
 
     @Test
-    void doPostLogoutWhenUpdateClient() throws ServletException, IOException {
+    void doPostLogoutWhenUpdateClient() throws ServletException, IOException, KeyNotFoundException {
         when(request.getParameter("email")).thenReturn("email");
         when(request.getParameter("password")).thenReturn("password");
         when(request.getParameter("password-verif")).thenReturn("password");
@@ -89,8 +90,26 @@ class EditServletTest {
         servlet.doPost(request,response);
 
         verify(response,atLeastOnce()).sendRedirect(request.getContextPath() + "/logout");
-
+        verify(clientDAO,atLeastOnce()).update(any(Client.class));
 
     }
+
+    @Test
+    void doPostWhenClientDosntExistShouldRedirect() throws KeyNotFoundException, ServletException, IOException {
+        when(request.getParameter("email")).thenReturn("email");
+        when(request.getParameter("password")).thenReturn("password");
+        when(request.getParameter("password-verif")).thenReturn("password");
+        when(request.getSession(false)).thenReturn(session);
+        when(session.getAttribute("client-session")).thenReturn(client);
+        when(request.getRequestDispatcher("/WEB-INF/pages/edit.jsp")).thenReturn(dispatcher);
+        doThrow(KeyNotFoundException.class).when(clientDAO).update(any(Client.class));
+
+        servlet.doPost(request,response);
+
+        verify(request,atLeastOnce()).setAttribute("error","The update failed");
+        verify(dispatcher,atLeastOnce()).forward(request,response);
+
+    }
+
 
 }
