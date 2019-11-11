@@ -10,4 +10,7 @@ import java.util.List;
 public interface IOrderDAO extends IDAO<Integer, Order> {
 
     List<Order> getClientOrders(String username) throws KeyNotFoundException;
+
+    @Override
+    void update(Order entity) throws UnsupportedOperationException;
 }
