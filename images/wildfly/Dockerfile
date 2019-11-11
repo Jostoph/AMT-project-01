@@ -1,4 +1,4 @@
-FROM jboss/wildfly:17.0.1.Final
+FROM jboss/wildfly:15.0.1.Final
 
 MAINTAINER Christoph Rueff <christoph.rouffsoitrueff@heig-vd.ch>
 

@@ -5,8 +5,9 @@ services:
     links:
      - mysql:db
     ports:
-     - "9090:8080"
+     - "8080:8080"
      - "9990:9990"
+     - "8787:8787"
   mysql:
     build: ./images/mysql
     environment:
