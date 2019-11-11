@@ -1,0 +1,4 @@
+Libellé,# Echantillons,Moyenne,Min,Max,Ecart type,% Erreur,Débit,Ko/sec reçus,Ko/sec émis,Moy. octets
+HTTP Request (login),47,102265,53870,153865,37996.41,0.000%,.30465,14280.25,0.15,47999157.0
+HTTP Request (products),5,236069,96058,273032,70013.10,0.000%,.01354,634.63,0.00,47998888.0
+TOTAL,52,115131,53870,273032,57725.25,0.000%,.12239,5737.05,0.06,47999131.1
