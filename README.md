@@ -23,13 +23,13 @@ Don't forget to check our 404 custom page ;)
 we consider you have install correctly install all of this programs:
  - [node](https://nodejs.org/en/download/)
  - [docker & docker-compose](https://www.docker.com/get-started)
- 
+
 ## Recommended
 
  - [git](https://www.atlassian.com/git/tutorials/install-git) (This way you can *pull* the project instead of downloading it)
  - An **internet connection** when using the application. We are using some CDNs to make our pages looking nice and
  the images of our products are also taken from a remote site. If you are offline it will be pretty sad.
- 
+
 ## Installation
 
 Download or *pull* the project.
@@ -106,7 +106,7 @@ Now you can start the tests (in another terminal)
   Make sure you generated the sample data first (at least once). 
   
   See [**Run App**](#run-app)
-    
+  
 
 ## Some additional information
 
@@ -123,11 +123,33 @@ The data consists of:
 
 ## JMeter results
 
-// TODO
+Using **JMeter**, we tried to quantify the impact of pagination in the **products servlet** when retrieving the products list from the database and diplaying them on the `/shop/products` page.
+
+We configured **JMeter** to simulate 100 users/clients (threads) trying to access this page at the same time. The connection through the login page is puporsely not taken in account (tracked), it is not included in what we want to test.
+
+The clients send 200 `GET` requests on the `/shop/products` page.
+
+We start with a pagination of 10 records by pages, what gives us the following graph :
+
+![GraphResponseTimeFor10](./Jmeter/GraphResponseTimeFor10.png)
+
+ We can see that the response time stays between 17'000 and 20'000 milliseconds. 
+
+ We rise the number of records by pages to 5'000 and restart the test to get the next graph : 
+
+![GraphResoinseTimeFor5000](./Jmeter/GraphResoinseTimeFor5000.png)
+
+The response time goes up between 33'000 and 39'000 milliseconds (after stabilisation).
+
+We stoped the tests here because rising the number of elements started causing us trouble with the buffer of the server or the java memory. But at this point we can see that even with 5'000 elements/page the difference in terme of response time is already high enough to show the impact and utility of pagination.
+
+We should also not forget that putting too few elements/page is not a great idea either. The users will need to perform more requests to go through the items (and on a user's point of view it can be tedious).
+
+For the reasons listed above, we chose to use a pagination of 10 elements on our products page (It also looks better this way).
 
 ## Known bugs
 
-// TODO
+There are actually no bugs in our application that we are awere of. If you find some, please think of it as a feature and contact us (It could be a feature that we don't really want ;)
 
 ## Features that could be improved (with additional time)
 
