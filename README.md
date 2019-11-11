@@ -112,6 +112,25 @@ Now you can start the tests (in another terminal)
 
 ### Sample data generation
 
+Our sample data is generated using the **Change module** from **npm**, it has a fixed seed (42) so that it always generates the same data set.
+
+The data consists of:
+
+- 50'000 clients
+- 1'000'000 products
+- 74'998 orders
+- 224'560 orderlines
+
+## JMeter results
+
 // TODO
 
+## Known bugs
+
+// TODO
+
+## Features that could be improved (with additional time)
+
+- It is actually not possible to create a product using the app, only manually adding it to the database. (we could make an additional page to let the client add a product, The DOAs have the methods ready for that.)
+- It is not possible to buy a product directly from the page of the product (we could add a button and servlet logic to add it to the current shopping cart, it doesn't need a lot of changes)
 
