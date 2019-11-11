@@ -21,9 +21,6 @@ public class ClientDAO implements IClientDAO {
     @Resource(lookup = "java:/jdbc/shop")
     DataSource dataSource;
 
-    @EJB
-    IAuthenticationService authenticationService;
-
     @Override
     public Client create(Client entity) throws DuplicateKeyException {
         Connection con = null;
@@ -32,7 +29,7 @@ public class ClientDAO implements IClientDAO {
             PreparedStatement statement = con.prepareStatement("INSERT INTO clients (USERNAME, EMAIL, PASSWORD_HASH) VALUES (?, ?, ?)");
             statement.setString(1, entity.getUsername());
             statement.setString(2, entity.getEmail());
-            statement.setString(3, authenticationService.hashPassword(entity.getPassword()));
+            statement.setString(3, entity.getPassword());
             statement.execute();
 
             return entity;
@@ -59,6 +56,7 @@ public class ClientDAO implements IClientDAO {
             }
 
             return new Client(rs.getString(1), rs.getString(2), rs.getString(3));
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw  new Error(e);

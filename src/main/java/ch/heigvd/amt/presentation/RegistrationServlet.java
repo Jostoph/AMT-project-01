@@ -1,5 +1,6 @@
 package ch.heigvd.amt.presentation;
 
+import ch.heigvd.amt.buisness.IAuthenticationService;
 import ch.heigvd.amt.datastore.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.integration.IClientDAO;
 import ch.heigvd.amt.model.Client;
@@ -17,6 +18,9 @@ public class RegistrationServlet extends HttpServlet {
 
     @EJB
     IClientDAO clientDAO;
+
+    @EJB
+    IAuthenticationService auth;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +54,7 @@ public class RegistrationServlet extends HttpServlet {
 
         if(errorMessage.isEmpty()) {
             try {
-                Client client = new Client(username, email, password);
+                Client client = new Client(username, email, auth.hashPassword(password));
 
                 clientDAO.create(client);
 

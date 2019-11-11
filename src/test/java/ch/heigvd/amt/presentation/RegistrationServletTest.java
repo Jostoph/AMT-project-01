@@ -1,5 +1,6 @@
 package ch.heigvd.amt.presentation;
 
+import ch.heigvd.amt.buisness.IAuthenticationService;
 import ch.heigvd.amt.datastore.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.integration.IClientDAO;
 import ch.heigvd.amt.model.Client;
@@ -31,15 +32,18 @@ class RegistrationServletTest {
     RequestDispatcher dispatcher;
     @Mock
     Client client;
+    @Mock
+    IAuthenticationService auth;
 
     @BeforeEach
     void setup() {
         servlet = new RegistrationServlet();
         servlet.clientDAO = clientDAO;
+        servlet.auth = auth;
     }
 
     @Test
-    void doGetShouldFormard() throws ServletException, IOException {
+    void doGetShouldForward() throws ServletException, IOException {
         when(request.getRequestDispatcher("/WEB-INF/pages/registration.jsp")).thenReturn(dispatcher);
 
         servlet.doGet(request, response);
@@ -49,7 +53,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void doPostShoulforwardWhenWrongAttribute() throws ServletException, IOException {
+    void doPostShouldforwardWhenWrongAttribute() throws ServletException, IOException {
         when(request.getParameter("username")).thenReturn("user");
         when(request.getParameter("email")).thenReturn("email");
         when(request.getParameter("password")).thenReturn("password");
@@ -64,7 +68,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void doPostWihToShordUsername() throws ServletException, IOException {
+    void doPostWithToShortUsername() throws ServletException, IOException {
         when(request.getParameter("username")).thenReturn("12");
         when(request.getParameter("email")).thenReturn("email");
         when(request.getParameter("password")).thenReturn("password");
@@ -105,8 +109,8 @@ class RegistrationServletTest {
 
         verify(request,atLeastOnce()).setAttribute("error","The passwords are not matching.");
         verify(dispatcher,atLeastOnce()).forward(request,response);
-
     }
+
     @Test
     void doPostShouldCreateClient() throws ServletException, IOException, DuplicateKeyException {
         when(request.getParameter("username")).thenReturn("user");
@@ -117,8 +121,6 @@ class RegistrationServletTest {
         when(request.getContextPath()).thenReturn("ContextPath");
 
         servlet.doPost(request,response);
-
-
         verify(response,atLeastOnce()).sendRedirect(request.getContextPath() + "/login");
 
     }
