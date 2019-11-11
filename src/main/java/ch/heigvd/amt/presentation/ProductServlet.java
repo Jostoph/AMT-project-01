@@ -18,17 +18,15 @@ public class ProductServlet extends HttpServlet {
     @EJB
     IProductDAO productDAO;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // get the product id from the request
         String productId = request.getParameter("product_id");
         try {
             Integer id = Integer.valueOf(productId);
             Product product;
 
-
+            // look for the product in the db
             product = productDAO.findById(id);
             request.setAttribute("product", product);
             request.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(request, response);

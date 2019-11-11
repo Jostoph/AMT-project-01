@@ -38,8 +38,10 @@ public class ProductsServlet extends HttpServlet {
             return;
         }
 
+        // get client session
         HttpSession session = request.getSession(false);
 
+        // get the Order from the session (the shopping cart)
         Order order = (Order) session.getAttribute("order");
 
         if(order != null) {
@@ -50,10 +52,14 @@ public class ProductsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // default page number
         int pageNum = 1;
+
+        // pagination size (chunk)
         int chunkSize = 10;
 
-
+        // create an Order in the Client session (used as a shopping cart)
         HttpSession session = request.getSession(false);
         Order currentOrder = (Order) session.getAttribute("order");
 
@@ -64,6 +70,7 @@ public class ProductsServlet extends HttpServlet {
             session.setAttribute("order", new Order(-1, currentClient.getUsername(), null, orderLines));
         }
 
+        // get the page number
         String reqPage = request.getParameter("pageNum");
 
         if(reqPage != null) {
@@ -74,9 +81,11 @@ public class ProductsServlet extends HttpServlet {
             }
         }
 
+        // get the total number of records
         int totalNum = productDAO.getNoRecords();
 
         if(totalNum > 0) {
+            // get the requested products chunk
             List<Product> products = productDAO.getChunk((pageNum - 1) * chunkSize, chunkSize);
 
             request.setAttribute("products", products);

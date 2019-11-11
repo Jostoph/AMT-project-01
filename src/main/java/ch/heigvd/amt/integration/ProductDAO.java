@@ -35,6 +35,7 @@ public class ProductDAO implements IProductDAO {
                 throw new SQLException("Create order failed, no rows where changed.");
             }
 
+            // get generated key
             ResultSet key = statement.getGeneratedKeys();
 
             if(key.next()) {
@@ -86,6 +87,7 @@ public class ProductDAO implements IProductDAO {
             statement.setInt(5, entity.getId());
 
             int numberOfUpdatedProducts = statement.executeUpdate();
+
             if(numberOfUpdatedProducts != 1) {
                 throw new KeyNotFoundException("Could not find product with id : " + entity.getId());
             }
@@ -104,7 +106,9 @@ public class ProductDAO implements IProductDAO {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement("DELETE FROM products WHERE PRODUCT_ID = ?");
             statement.setInt(1, id);
+
             int numberOfDeletedProducts = statement.executeUpdate();
+
             if(numberOfDeletedProducts != 1) {
                 throw new KeyNotFoundException("Could not find product with id : " + id);
             }
@@ -127,10 +131,14 @@ public class ProductDAO implements IProductDAO {
             statement.setInt(1, from);
             statement.setInt(2, limit);
             ResultSet rs = statement.executeQuery();
+
             ArrayList<Product> retrievedProducts = new ArrayList<>();
+
+            // add the retrieved products to the return list
             while (rs.next()) {
                 retrievedProducts.add(new Product(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5)));
             }
+
             return retrievedProducts;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -9,9 +9,8 @@ import java.io.IOException;
 
 @WebFilter(filterName = "SecurityFilter", urlPatterns = "/shop/*")
 public class SecurityFilter implements Filter {
-//    public void destroy() {
-//    }
 
+    // The security filter is denying access to unauthorized (not singed in) users to every page after /shop/
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 
         HttpServletRequest req = (HttpServletRequest) request;
@@ -27,9 +26,5 @@ public class SecurityFilter implements Filter {
             chain.doFilter(req, resp);
         }
     }
-
-//    public void init(FilterConfig config) throws ServletException {
-//
-//    }
 
 }

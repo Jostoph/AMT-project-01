@@ -33,6 +33,7 @@ public class OrderDAO implements IOrderDAO {
                 throw new SQLException("Create order failed, no rows where changed.");
             }
 
+            // get the generated key
             ResultSet key = statement.getGeneratedKeys();
 
             if(key.next()) {
@@ -65,7 +66,9 @@ public class OrderDAO implements IOrderDAO {
                 throw new KeyNotFoundException("Could not find order with id : " + id);
             }
 
+            // retrieve the orderLines of the order
             List<OrderLine> orderLines = findOrderLinesById(id, con);
+
             return new Order(id, rs.getString(1), rs.getDate(2), orderLines);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,6 +78,7 @@ public class OrderDAO implements IOrderDAO {
         }
     }
 
+    // not used, we choose to make our orders immutable in the app
     public void update(Order entity) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("An Order can't be changed");
     }
@@ -86,7 +90,9 @@ public class OrderDAO implements IOrderDAO {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement("DELETE FROM clientOrders WHERE ORDER_ID = ?");
             statement.setInt(1, id);
+
             int numberOfDeletedOrders = statement.executeUpdate();
+
             if(numberOfDeletedOrders != 1) {
                 throw new KeyNotFoundException("Could not find order with id : " + id);
             }
@@ -106,10 +112,14 @@ public class OrderDAO implements IOrderDAO {
             PreparedStatement statement = con.prepareStatement("SELECT ORDER_ID FROM clientOrders WHERE USERNAME = ?");
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
+
             List<Order> orders = new ArrayList<>();
+
+            // get all the orders of the client
             while (rs.next()) {
                 orders.add(findById(rs.getInt(1)));
             }
+
             return orders;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,6 +150,8 @@ public class OrderDAO implements IOrderDAO {
             ArrayList<OrderLine> retrievedOrderLines = new ArrayList<>();
             statement.setInt(1, orderId);
             ResultSet rs = statement.executeQuery();
+
+            // get all the orderLines from an order
             while (rs.next()) {
                 retrievedOrderLines.add(new OrderLine(rs.getInt(2), rs.getInt(1)));
             }

@@ -37,8 +37,10 @@ public class ProfileServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
+        // get the Client session information
         Client currentClient = (Client) session.getAttribute("client-session");
 
+        // request to delete the account
         if(request.getParameter("delete") != null && currentClient != null) {
             // delete client account
             try {
@@ -48,8 +50,10 @@ public class ProfileServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
+            // invalidation of the session
             session.invalidate();
 
+            // go home
             response.sendRedirect(request.getContextPath());
         }
     }
@@ -57,6 +61,7 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        // get Client information to show on profile page
         Client client = (Client) request.getSession(false).getAttribute("client-session");
         request.setAttribute("username", client.getUsername());
         request.setAttribute("email", client.getEmail());
@@ -64,6 +69,7 @@ public class ProfileServlet extends HttpServlet {
         List<Order> orders;
         Map<Integer, String> productNames;
 
+        // retrieving client orders and product names
         try {
             orders = orderDAO.getClientOrders(client.getUsername());
             if(orders != null) {

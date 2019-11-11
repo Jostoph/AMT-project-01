@@ -33,6 +33,7 @@ public class RegistrationServlet extends HttpServlet {
 
         String errorMessage = "";
 
+        // check if the there are empty fields
         if(username.isEmpty() || email.isEmpty() || password.isEmpty() || passwordVerif.isEmpty()) {
             errorMessage = "Please fill every field";
             request.setAttribute("error", errorMessage);
@@ -53,6 +54,7 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         if(errorMessage.isEmpty()) {
+            // if the input is valid, create a new user and send to the db
             try {
                 Client client = new Client(username, email, auth.hashPassword(password));
 

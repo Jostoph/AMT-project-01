@@ -29,6 +29,7 @@ public class EditServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordVerif = request.getParameter("password-verif");
 
+        // check if client wants to update the password and if it is a valid change
         if(!password.isEmpty()) {
             if(!password.equals(passwordVerif) || password.length() < 6) {
                 request.setAttribute("error", "The passwords must be equal and at least 6 characters long.");
@@ -37,13 +38,16 @@ public class EditServlet extends HttpServlet {
             }
         }
 
+        // get the Client information from the session
         Client current = (Client) request.getSession(false).getAttribute("client-session");
 
+        // Create the updated Client
         Client updatedClient = new Client(current.getUsername(),
                 email.isEmpty() ? current.getEmail() : email,
                 password.isEmpty() ? current.getPassword() : auth.hashPassword(password));
 
         try {
+            // send the changes to the db
             clientDAO.update(updatedClient);
         } catch (KeyNotFoundException e) {
             request.setAttribute("error","The update failed");
@@ -51,6 +55,7 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
+        // When the changes are done, the user is logged out
         response.sendRedirect(request.getContextPath() + "/logout");
     }
 

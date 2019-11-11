@@ -23,8 +23,10 @@ public class ShoppingCartServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
+        // get Client current Order from session (used as shopping cart)
         Order currentOrder = (Order) session.getAttribute("order");
 
+        // if the user clicked on the order button
         if(request.getParameter("command") != null) {
             // send order
             if(currentOrder != null && !currentOrder.getOrderLines().isEmpty()) {
@@ -40,8 +42,9 @@ public class ShoppingCartServlet extends HttpServlet {
                 // should never go there
                 response.sendRedirect(request.getContextPath() + "/shop/products");
             }
-
+        // if the user clicked on the cancel button
         } else if(request.getParameter("cancel") != null) {
+
             // cancel order
             session.removeAttribute("order");
             response.sendRedirect(request.getContextPath() + "/shop/shop");
@@ -56,6 +59,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
+        // Get Client Order to be displayed on the page
         Order currentOrder = (Order) session.getAttribute("order");
 
         if(currentOrder != null) {
