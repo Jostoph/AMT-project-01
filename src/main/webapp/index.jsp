@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html style="background-image: url('<c:url value="/res/assets/tbm-bg.jpeg" />')">
 
-<%-- General TODO : Make .war build into wildfly (remove comment, and change build path)--%>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
